@@ -31,6 +31,15 @@ import {
 } from "@tabler/icons-react";
 import schoolImage from '../../assets/LogoRich.png';
 
+const buttonStyle = {
+  backgroundColor: 'red',   // Change the background color to red
+  color: 'white',           // Change the text color to white
+  padding: '10px 20px',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer'
+};
+
 const useStyles = createStyles((theme) => ({
   link: {
     display: "flex",
@@ -97,6 +106,7 @@ const DefaultHeader = () => {
           </Group>
 
           <Group className={classes.hiddenMobile}>
+            <Button style={buttonStyle}>Admin Pannel</Button>
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
           </Group>
@@ -137,6 +147,7 @@ const DefaultHeader = () => {
           />
 
           <Group position="center" grow pb="xl" px="md">
+            
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
           </Group>
