@@ -116,3 +116,5 @@ export function NavbarSimple() {
     </Navbar>
   );
 }
+
+export default NavbarSimple
