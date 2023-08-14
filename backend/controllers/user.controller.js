@@ -28,3 +28,16 @@ export const registerUser = async(req,res) =>{
 
     }
 };
+
+//get all members
+export const getAllMembers = async (req,res)=>{
+
+    try{
+        const members = await User.find();
+
+        res.status(200).json(User);
+    }catch(err){
+        res.status(500).json({ message: "Failed to fetch Members", err });
+
+    }
+}
