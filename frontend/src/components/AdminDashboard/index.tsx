@@ -69,7 +69,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const data = [
-  { link: '', label: 'Manage Members', icon: IconDatabaseImport },
+  { link: '/admin/manageMember', label: 'Manage Members', icon: IconDatabaseImport },
   { link: '', label: 'Adevertisement', icon: IconReceipt2 },
 ];
 
