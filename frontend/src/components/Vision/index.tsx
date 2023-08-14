@@ -10,18 +10,12 @@ const Vision = () => {
         </Group>
       </Card.Section>
       <Text p={50} align="justify" ff={"sans-serif"} size={"lg"}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa
-        explicabo, dolorem aut iusto pariatur debitis quas? Nesciunt totam
-        similique quibusdam error dolor aliquam beatae adipisci, harum magni!
-        Mollitia, corrupti eos!
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa
-        explicabo, dolorem aut iusto pariatur debitis quas? Nesciunt totam
-        similique quibusdam error dolor aliquam beatae adipisci, harum magni!
-        Mollitia, corrupti eos!
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa
-        explicabo, dolorem aut iusto pariatur debitis quas? Nesciunt totam
-        similique quibusdam error dolor aliquam beatae adipisci, harum magni!
-        Mollitia, corrupti eos! Mollitia, corrupti eos! Mollitia, corrupti eos! Mollitia, corrupti eos!dssadaas
+        Richmond College is dedicated to shaping the future leaders of society.
+        We believe that education is not just about preparing for exams, but
+        about preparing for life. Our comprehensive approach to education
+        encompasses academic excellence, character development, and practical
+        life skills, equipping our students to confidently navigate their paths
+        beyond the classroom.
       </Text>
     </Card>
   );
