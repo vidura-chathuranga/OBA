@@ -3,7 +3,6 @@ import LandingCarousel from "../components/Carousel";
 import DefaultHeader from "../components/defaultHeader";
 import Vision from "../components/Vision";
 import Mission from "../components/Mission";
-import {selectCountryList} from '../components/coutries';
 const LandingPage = () => {
   return (
     <>
@@ -15,7 +14,7 @@ const LandingPage = () => {
     </Grid>
     <Vision/>
     <Mission/>
-    <Select data={selectCountryList} searchable/>
+    
     </>
   );
 };
