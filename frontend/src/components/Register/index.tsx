@@ -30,7 +30,6 @@ import { useForm } from "@mantine/form";
 import { showNotification, updateNotification } from '@mantine/notifications';
 import { useState } from "react";
 import { YearPickerInput } from '@mantine/dates';
-import { CountryDropdown } from "react-country-region-selector";
 import {selectCountryList} from "../../components/Register/coutries";
 import UserAPI from '../../API/userAPI/user.api';
 
@@ -47,14 +46,14 @@ export const Register = () => {
 
         // If "Other" is selected, clear customRole input
         if (value !== 'other') {
-            setCustomRole('');
+            registerForm.setFieldValue("jobRole",value);
         }
+        
     };
     const handleCustomRoleChange = (event: any) => {
-        setCustomRole(event.target.value);
+        registerForm.setFieldValue("jobRole",event.target.value);
+        
 
-        // Set selectedRole to 'other' when inputting custom role
-        setSelectedRole('other');
     };
 
     const jobRoleOptions = [
@@ -148,6 +147,7 @@ export const Register = () => {
 
                             {/* Add my details form */}
                             <form
+
                                 onSubmit={registerForm.onSubmit((values)=> registerUser(values))}
                             >
                                 <Paper withBorder shadow="md" p={30} mt={30} radius="md">
@@ -174,21 +174,24 @@ export const Register = () => {
                                     <YearPickerInput
                                         label="Batch Year"
                                         placeholder="Pick date"
-                                        value={value}
-                                        onChange={setValue}
+                                        // value={value}
+                                        // onChange={setValue}
+                                        {...registerForm.getInputProps("year")}
                                         
-
                                     />
 
                                     <Select data={selectCountryList} searchable
                                         label="Country Of Residence"
                                         placeholder='Sri Lanka'
+                                        {...registerForm.getInputProps("country")}
+
                                     />
 
                                     <TextInput
 
                                         label="Mobile No"
                                         placeholder='+9471136106'
+                                        {...registerForm.getInputProps("mobile")}
 
 
                                     />
@@ -201,11 +204,12 @@ export const Register = () => {
                                             value={selectedRole}
                                             data={jobRoleOptions}
                                             onChange={(value) => handleSelectChange(value)}
+                                           
                                         />
                                         {selectedRole === 'other' && (
                                             <input
                                                 type="text"
-                                                value={customRole}
+                                                
                                                 onChange={handleCustomRoleChange}
                                                 placeholder="Enter your job role"
                                                 style={{ marginTop: '10px', width: '426px', height: '30px', borderRadius: '5px', border: '1px solid #ccc', padding: '5px' }}
