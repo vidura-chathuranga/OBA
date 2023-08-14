@@ -109,7 +109,7 @@ const DefaultHeader = () => {
           </Group>
 
           <Group className={classes.hiddenMobile}>
-            <Button style={buttonStyle}>Admin Pannel</Button>
+            <Button onClick={()=>window.location.href='/admin/dashboard'} style={buttonStyle}>Admin Pannel</Button>
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
           </Group>
