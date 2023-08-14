@@ -29,7 +29,7 @@ import {
   IconCoin,
   IconChevronDown,
 } from "@tabler/icons-react";
-import schoolImage from '../../assets/schoolImage.png';
+import schoolImage from '../../assets/LogoRich.png';
 
 const useStyles = createStyles((theme) => ({
   link: {
