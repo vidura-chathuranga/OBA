@@ -32,7 +32,7 @@ import {
 import schoolImage from '../../assets/LogoRich.png';
 
 const buttonStyle = {
-  backgroundColor: 'red',   // Change the background color to red
+  backgroundColor: 'purple',   // Change the background color to red
   color: 'white',           // Change the text color to white
   padding: '10px 20px',
   border: 'none',
