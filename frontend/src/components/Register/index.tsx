@@ -31,6 +31,7 @@ import { showNotification, updateNotification } from '@mantine/notifications';
 import { useState } from "react";
 import { YearPickerInput } from '@mantine/dates';
 import { CountryDropdown } from "react-country-region-selector";
+import {selectCountryList} from "../../components/Register/coutries"
 
 
 
@@ -115,19 +116,12 @@ export const Register = () => {
                                         value={value}
                                         onChange={setValue}
 
-
                                     />
 
-                                    <div >
-                                        <h5> Country Of Residence</h5>
-                                        <CountryDropdown
-                                            value={country}
-                                            
-                                            onChange={(val) => setCountry(val)}
-                                            
-                                            
-                                        />{" "}
-                                    </div>
+                                    <Select data={selectCountryList} searchable
+                                        label="Country Of Residence"
+                                        placeholder='Sri Lanka'
+                                    />
 
                                     <TextInput
 
