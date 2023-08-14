@@ -69,8 +69,8 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const data = [
-  { link: '', label: 'Manage Members', icon: IconBellRinging },
-  { link: '', label: 'Adevertisement', icon: IconDatabaseImport },
+  { link: '', label: 'Manage Members', icon: IconDatabaseImport },
+  { link: '', label: 'Adevertisement', icon: IconReceipt2 },
 ];
 
 export function NavbarSimple() {
