@@ -12,7 +12,7 @@ import {
     Box,
     Modal,
     LoadingOverlay,
-  
+
 } from "@mantine/core";
 import { keys } from "@mantine/utils";
 import {
@@ -106,27 +106,17 @@ const ManageMembers = () => {
     const [search, setSearch] = useState("");
     const { classes, cx } = useStyles();
     const [scrolled, setScrolled] = useState(false);
-    const [opened, setOpened] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [editOpened, setEditOpened] = useState(false);
     const [sortedData, setSortedData] = useState<Data[]>([]);
 
     // use react query and fetch data
-    const {
-        data = [],
-        isLoading,
-        isError,
-        refetch,
-    } = useQuery(
-        ["memberData"],
-        () => {
-            return UserAPI.getAllMembers().then((res) => res.data);
-        },
+    const { data = [], isLoading, isError, refetch, } = useQuery(["memberData"], () => {
+        return UserAPI.getAllMembers().then((res) => res.data);
+    },
         { initialData: [] }
     );
 
-    // show the loading overlay when adding invoice to the database
-    const [invoiceOverlay, setInvoiceOverlay] = useState(false);
 
     // search filter
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,14 +127,6 @@ const ManageMembers = () => {
             setSortedData([]);
         }
     };
-
-    // customer email
-    const timeoutRef = useRef<number>(-1);
-    const [emailLoader, setEmailloader] = useState(false);
-    const [email, setEmail] = useState('');
-    const [emailData, setEmailData] = useState<string[]>([])
-
-
     //declare edit form
     const editForm = useForm({
         validateInputOnChange: true,
