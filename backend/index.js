@@ -2,6 +2,7 @@ import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
 import DBCON from './configs/dbConfig.js';
+import UserRoutes from "./routes/user.routes.js"
 
 const app = express();
 
@@ -25,8 +26,10 @@ app.get('/',(req,res)=>{
     res.send("OBA PROJECT");
 });
 
+app.use('/user',UserRoutes);
 
 app.listen(PORT,()=>{
     console.log(`🚀 Server is started on port ${PORT}`);
     DBCON();
 });
+
