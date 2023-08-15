@@ -90,7 +90,7 @@ const DefaultHeader = () => {
     <Box pb={20}>
       <Header height={80} px="md">
         <Group position="apart" sx={{ height: "100%" }}>
-          <Image src={schoolImage} height={60} width={60} mt={5} ml={15} mb={5}/>
+          <Image src={schoolImage} height={60} width={60} mt={5} ml={15} mb={5} />
 
           <Group
             sx={{ height: "100%" }}
@@ -109,7 +109,12 @@ const DefaultHeader = () => {
           </Group>
 
           <Group className={classes.hiddenMobile}>
-            <Button onClick={()=>window.location.href='/admin/dashboard'} style={buttonStyle}>Admin Pannel</Button>
+            <Button
+              onClick={() =>
+                window.location.href = '/admin/manageMember'}
+              style={buttonStyle}>
+              Admin Pannel
+            </Button>
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
           </Group>
@@ -150,7 +155,7 @@ const DefaultHeader = () => {
           />
 
           <Group position="center" grow pb="xl" px="md">
-            
+
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
           </Group>
