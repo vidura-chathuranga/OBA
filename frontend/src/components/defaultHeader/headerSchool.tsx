@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { createStyles, Header, Group, ActionIcon, Container, Burger, rem, Image, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconBrandYoutube, IconBrandFacebook } from '@tabler/icons-react';
-import { World } from 'tabler-icons-react';
 import LogoRich from "../../assets/LogoRich.png";
 import { Title } from '@mantine/core';
+import { IconWorld } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
     inner: {
@@ -87,7 +87,7 @@ export function HeaderSchool() {
                         </a>
                         <a href="https://www.richmondcollege.lk/" target="_blank" rel="noopener noreferrer">
                             <ActionIcon size="lg">
-                                <World size="1.1rem" />
+                                <IconWorld size="1.1rem" />
                             </ActionIcon>
                         </a>
                     </Group>
