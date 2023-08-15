@@ -57,15 +57,14 @@ export const updateMembers = async (req, res) => {
         jobRole: req.body.jobRole,
 
     };
+    console.log(id)
 
-    //console.log(updateFields)
+
     try {
-        const updateMember = await User.findByIdAndUpdate(id, updateFields);
+        const updateMember = await User.findByIdAndUpdate(id, updateFields,{ new: true });
 
-        if (!updateMember) {
-            // If the member is not found, send a 404 status code with a message
-            return res.status(404).json({ message: "Member not found" });
-        }
+        console.log(updateMember)
+
         res.status(200).json(updateMember); // Send the updated member as the response
 
 
