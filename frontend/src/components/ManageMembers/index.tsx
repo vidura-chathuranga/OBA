@@ -167,7 +167,7 @@ const ManageMembers = () => {
             autoClose: false,
         });
 
-        console.log(values)
+        // console.log(values)
 
         UserAPI.updateMember(values)
             .then((response) => {
@@ -339,11 +339,12 @@ const ManageMembers = () => {
                                     <ActionIcon
                                         color="teal"
                                         onClick={() => {
+                                            const year = new Date(row.year); // Convert to Date object
                                             editForm.setValues({
                                                 _id: row._id,
                                                 name: row.name,
                                                 email: row.email,
-                                                year: row.year,
+                                                year: year,
                                                 country: row.country,
                                                 mobile: row.mobile,
                                                 jobRole: row.jobRole,

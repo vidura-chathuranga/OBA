@@ -72,6 +72,11 @@ const useStyles = createStyles((theme) => ({
         : theme.colors.gray[6],
     marginRight: theme.spacing.sm,
   },
+  links: {
+    [theme.fn.smallerThan("xs")]: {
+      display: "none",
+    },
+  },
 
   linkActive: {
     "&, &:hover": {
@@ -98,14 +103,14 @@ const data = [
   { link: "", label: "Adevertisement", icon: IconReceipt2 },
 ];
 
-export function NavbarSimple() {
+const NavbarSimple = ({link_id} : any)=> {
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState("Billing");
+  const [active, setActive] = useState(data[link_id].link);
 
   const links = data.map((item) => (
     <a
       className={cx(classes.link, {
-        [classes.linkActive]: item.label === active,
+        [classes.linkActive]: item.link === active,
       })}
       href={item.link}
       key={item.label}
@@ -123,8 +128,8 @@ export function NavbarSimple() {
     <Navbar height={700} width={{ sm: 300 }} p="md">
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
-          <MantineLogo size={28} />
-          <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
+          {/* <MantineLogo size={28} />
+          <Code sx={{ fontWeight: 700 }}>v3.1.2</Code> */}
         </Group>
         {links}
       </Navbar.Section>
