@@ -103,7 +103,7 @@ const DefaultHeader = () => {
             <a href="#" className={classes.link}>
               Contact Us
             </a>
-            <a href="/Register" className={classes.link}>
+            <a href="/AddDetails" className={classes.link}>
               Members
             </a>
           </Group>

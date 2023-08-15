@@ -127,6 +127,7 @@ export const Register = () => {
 
     return (
         <>
+        {/* <HeaderSchool/> */}
             <div style={{
 
                 backgroundSize: 'cover',
