@@ -9,7 +9,7 @@ import {
   rem,
 } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
-import image1 from "../../assets/carouselImages/1.png";
+import image1 from "../../assets/carouselImages/1.jpg";
 import image2 from "../../assets/carouselImages/2.jpg";
 import image3 from "../../assets/carouselImages/3.jpg";
 
