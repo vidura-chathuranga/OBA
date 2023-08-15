@@ -29,7 +29,7 @@ class UserAPI{
         mobile: string;
         jobRole: string;
     }) =>{
-
+        // console.log(values);
         return axios.put(`${BASE_URL}/user/update`,values);
 
     }
@@ -38,7 +38,7 @@ class UserAPI{
     static deleteMember = (values:{
         _id: string;
     }) => {
-        return axios.delete(`${BASE_URL}/user/delete/${values}`);
+        return axios.delete(`${BASE_URL}/user/delete/${values._id}`);
       };
 };
 
