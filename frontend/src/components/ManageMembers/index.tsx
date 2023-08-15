@@ -303,7 +303,7 @@ const ManageMembers = () => {
             </tr>
         ));
     } else {
-        rows = sortedData?.map((row: any) => (
+        rows = data?.map((row: any) => (
             <tr key={row._id}>
                 <td>
                     <Text size={15}>{row.name}</Text>
