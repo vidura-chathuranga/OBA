@@ -44,22 +44,16 @@ export function HeaderSchool() {
 
     return (
         <Header height={100} mb={0} style={{ backgroundColor: '#B7CEEC' }}>
-            <Container>
+           
 
-                <Group className={classes.links} spacing={5}>
+           
+                <Group position='apart'>
 
-                </Group>
-
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-
-                    <div>
-                        <Image width={60} height={60} src={LogoRich} style={{ alignContent: 'left' ,paddingTop: '10px' }} />
-                    </div>
-
-
-                    <div>
+                   
+                        <Image width={70} height={70} src={LogoRich} style={{marginLeft:'400px' , paddingTop:'10px'}} />
                   
-                        <Title style={{paddingTop:'10px',marginLeft:'100px'}}
+                  
+                        <Title 
                             variant="gradient"
                             gradient={{ from: '#780206', to: '#061161', deg: 45 }}
                             sx={{ fontFamily: 'Georgia, serif' }}
@@ -69,11 +63,10 @@ export function HeaderSchool() {
                             
                         > Richmond College  </Title>
                        
-                    </div>
+                  
                    
 
-
-                    <Group spacing={0} className={classes.social} position="right" noWrap style={{display: 'right'}}>
+                    <Group spacing={0} className={classes.social} >
 
                         <a href="https://www.facebook.com/richmondcollege" target='_blank' rel="noopener noreferrer">
                             <ActionIcon size="lg">
@@ -92,9 +85,11 @@ export function HeaderSchool() {
                         </a>
                     </Group>
 
-                </div>
+               
+                </Group>
+                
 
-            </Container>
+            
         </Header>
     );
 }
