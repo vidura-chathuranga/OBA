@@ -36,7 +36,6 @@ export const getAllMembers = async (req, res) => {
     try {
         const members = await User.find();
 
-        console.log(members)
         res.status(200).json(members);
     } catch (err) {
         res.status(500).json({ message: "Failed to fetch Members", err });
@@ -59,6 +58,7 @@ export const updateMembers = async (req, res) => {
 
     };
 
+    //console.log(updateFields)
     try {
         const updateMember = await User.findByIdAndUpdate(id, updateFields);
 

@@ -85,7 +85,7 @@ interface Data {
     _id: string;
     name: string;
     email: string;
-    year: string;
+    year: Date;
     country: string;
     mobile: string;
     jobRole: string;
@@ -166,6 +166,9 @@ const ManageMembers = () => {
             message: "Please wait while we update member record..",
             autoClose: false,
         });
+
+        console.log(values)
+
         UserAPI.updateMember(values)
             .then((response) => {
                 updateNotification({
@@ -243,7 +246,7 @@ const ManageMembers = () => {
                     <Text size={15}>{row.email}</Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.year}</Text>
+                    <Text size={15}>{new Date(row.year).toISOString()}</Text>
                 </td>
                 <td>
                     <Text size={15}>{row.country}</Text>
@@ -312,7 +315,7 @@ const ManageMembers = () => {
                     <Text size={15}>{row.email}</Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.year}</Text>
+                    <Text size={15}>{new Date(row.year).toISOString()}</Text>
                 </td>
                 <td>
                     <Text size={15}>{row.country}</Text>
@@ -479,12 +482,12 @@ const ManageMembers = () => {
                         label="Batch Year"
                         placeholder="Pick date"
                         withAsterisk
-                        {...editForm.getInputProps("added_date")}
+                        {...editForm.getInputProps("year")}
                     />
                     <TextInput
                         label="Country"
                         placeholder="Enter Country"
-                        {...editForm.getInputProps("Country")}
+                        {...editForm.getInputProps("country")}
                         required
                     />
                     <TextInput
@@ -543,6 +546,8 @@ const ManageMembers = () => {
                                 <th>Country</th>
                                 <th>Mobile Number</th>
                                 <th>jobRole</th>
+                                <th>Action</th>
+
                             </tr>
                         </thead>
                         <tbody>
