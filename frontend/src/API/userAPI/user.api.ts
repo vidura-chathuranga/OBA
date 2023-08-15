@@ -15,7 +15,7 @@ class UserAPI{
     //get all registered users
     static getAllMembers = () =>{
 
-        return axios.get(`${BASE_URL}/user`,);
+        return axios.get(`${BASE_URL}/user`);
     }
 
 
