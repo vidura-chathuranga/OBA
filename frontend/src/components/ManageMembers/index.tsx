@@ -246,7 +246,7 @@ const ManageMembers = () => {
                     <Text size={15}>{row.email}</Text>
                 </td>
                 <td>
-                    <Text size={15}>{new Date(row.year).toISOString()}</Text>
+                    <Text size={15}>{new Date(row.year).getFullYear()}</Text>
                 </td>
                 <td>
                     <Text size={15}>{row.country}</Text>
@@ -315,7 +315,8 @@ const ManageMembers = () => {
                     <Text size={15}>{row.email}</Text>
                 </td>
                 <td>
-                    <Text size={15}>{new Date(row.year).toISOString()}</Text>
+                    <Text size={15}>{new Date(row.year).getFullYear()}</Text>
+
                 </td>
                 <td>
                     <Text size={15}>{row.country}</Text>
