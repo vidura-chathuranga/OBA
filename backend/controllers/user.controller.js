@@ -37,7 +37,6 @@ export const getAllMembers = async (req, res) => {
     try {
         const members = await User.find();
 
-        console.log(members)
         res.status(200).json(members);
     } catch (err) {
         res.status(500).json({ message: "Failed to fetch Members", err });
@@ -59,14 +58,14 @@ export const updateMembers = async (req, res) => {
         jobRole: req.body.jobRole,
 
     };
+    console.log(id)
+
 
     try {
-        const updateMember = await User.findByIdAndUpdate(id, updateFields);
+        const updateMember = await User.findByIdAndUpdate(id, updateFields,{ new: true });
 
-        if (!updateMember) {
-            // If the member is not found, send a 404 status code with a message
-            return res.status(404).json({ message: "Member not found" });
-        }
+        console.log(updateMember)
+
         res.status(200).json(updateMember); // Send the updated member as the response
 
 

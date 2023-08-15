@@ -85,7 +85,7 @@ interface Data {
     _id: string;
     name: string;
     email: string;
-    year: string;
+    year: Date;
     country: string;
     mobile: string;
     jobRole: string;
@@ -166,6 +166,9 @@ const ManageMembers = () => {
             message: "Please wait while we update member record..",
             autoClose: false,
         });
+
+        // console.log(values)
+
         UserAPI.updateMember(values)
             .then((response) => {
                 updateNotification({
@@ -243,7 +246,7 @@ const ManageMembers = () => {
                     <Text size={15}>{row.email}</Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.year}</Text>
+                    <Text size={15}>{new Date(row.year).getFullYear()}</Text>
                 </td>
                 <td>
                     <Text size={15}>{row.country}</Text>
@@ -312,7 +315,8 @@ const ManageMembers = () => {
                     <Text size={15}>{row.email}</Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.year}</Text>
+                    <Text size={15}>{new Date(row.year).getFullYear()}</Text>
+
                 </td>
                 <td>
                     <Text size={15}>{row.country}</Text>
@@ -335,11 +339,12 @@ const ManageMembers = () => {
                                     <ActionIcon
                                         color="teal"
                                         onClick={() => {
+                                            const year = new Date(row.year); // Convert to Date object
                                             editForm.setValues({
                                                 _id: row._id,
                                                 name: row.name,
                                                 email: row.email,
-                                                year: row.year,
+                                                year: year,
                                                 country: row.country,
                                                 mobile: row.mobile,
                                                 jobRole: row.jobRole,
@@ -479,12 +484,12 @@ const ManageMembers = () => {
                         label="Batch Year"
                         placeholder="Pick date"
                         withAsterisk
-                        {...editForm.getInputProps("added_date")}
+                        {...editForm.getInputProps("year")}
                     />
                     <TextInput
                         label="Country"
                         placeholder="Enter Country"
-                        {...editForm.getInputProps("Country")}
+                        {...editForm.getInputProps("country")}
                         required
                     />
                     <TextInput
@@ -543,6 +548,8 @@ const ManageMembers = () => {
                                 <th>Country</th>
                                 <th>Mobile Number</th>
                                 <th>jobRole</th>
+                                <th>Action</th>
+
                             </tr>
                         </thead>
                         <tbody>
