@@ -3,6 +3,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import DBCON from './configs/dbConfig.js';
 import UserRoutes from "./routes/user.routes.js"
+import AdminRoutes from './routes/admin.routes.js';
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.get('/',(req,res)=>{
 });
 
 app.use('/user',UserRoutes);
+app.use('/admin',AdminRoutes);
 
 app.listen(PORT,()=>{
     console.log(`🚀 Server is started on port ${PORT}`);
