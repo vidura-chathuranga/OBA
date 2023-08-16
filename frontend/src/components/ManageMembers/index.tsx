@@ -90,6 +90,7 @@ interface Data {
     year: Date;
     country: string;
     mobile: string;
+    company: string;
     jobRole: string;
 
 }
@@ -165,6 +166,7 @@ const ManageMembers = () => {
             year: new Date(),
             country: "",
             mobile: "",
+            company: "",
             jobRole: "",
         },
     });
@@ -185,6 +187,7 @@ const ManageMembers = () => {
         year: Date;
         country: string;
         mobile: string;
+        company: string;
         jobRole: string;
     }) => {
         showNotification({
@@ -284,6 +287,11 @@ const ManageMembers = () => {
                     </Text>
                 </td>
                 <td>
+                    <Text size={15} style={row.company ? {} : { color: 'red' }}>
+                        {row.company || "NaN"}
+                    </Text>
+                </td>
+                <td>
                     <Text size={15} style={row.jobRole ? {} : { color: 'red' }}>
                         {row.jobRole || "NaN"}
                     </Text>
@@ -305,6 +313,7 @@ const ManageMembers = () => {
                                                 year: row.year,
                                                 country: row.country,
                                                 mobile: row.mobile,
+                                                company: row.company,
                                                 jobRole: row.jobRole,
                                             });
                                             setEditOpened(true);
@@ -358,6 +367,11 @@ const ManageMembers = () => {
                     </Text>
                 </td>
                 <td>
+                    <Text size={15} style={row.company ? {} : { color: 'red' }}>
+                        {row.company || "NaN"}
+                    </Text>
+                </td>
+                <td>
                     <Text size={15} style={row.jobRole ? {} : { color: 'red' }}>
                         {row.jobRole || "NaN"}
                     </Text>
@@ -380,6 +394,7 @@ const ManageMembers = () => {
                                                 year: year,
                                                 country: row.country,
                                                 mobile: row.mobile,
+                                                company: row.company,
                                                 jobRole: row.jobRole,
                                             });
                                             setEditOpened(true);
@@ -531,6 +546,12 @@ const ManageMembers = () => {
                         {...editForm.getInputProps("mobile")}
                         required
                     />
+                    <TextInput
+                        label="Company Name"
+                        placeholder="Enter Company Name"
+                        {...editForm.getInputProps("company")}
+                        required
+                    />
 
                     <Select
                         label="Job Role"
@@ -589,9 +610,10 @@ const ManageMembers = () => {
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Year</th>
+                                <th>Batch Year</th>
                                 <th>Country</th>
                                 <th>Mobile Number</th>
+                                <th>Company Name</th>
                                 <th>jobRole</th>
                                 <th>Action</th>
 

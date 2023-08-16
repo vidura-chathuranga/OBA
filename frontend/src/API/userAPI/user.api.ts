@@ -26,6 +26,7 @@ class UserAPI{
         year: Date;
         country: string;
         mobile: string;
+        company: string;
         jobRole: string;
     }) =>{
         console.log(values);
