@@ -55,12 +55,10 @@ export const updateMembers = async (req, res) => {
         year: req.body.year,
         country: req.body.country,
         mobile: req.body.mobile,
+        company : req.body.company,
         jobRole: req.body.jobRole,
 
     };
-    console.log(id)
-
-
     try {
         const updateMember = await User.findByIdAndUpdate(id, updateFields,{ new: true });
 
