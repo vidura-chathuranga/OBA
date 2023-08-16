@@ -8,6 +8,7 @@ import PromationCode from "../components/promationCode";
 import AddDetails from "../pages/AddMyDetails";
 
 import ManageMembersPage from "../pages/ManageMembers";
+import AdminLogin from "../pages/AdminLogin";
 const AllRoutes = () => {
   const client = new QueryClient();//config query client
 
@@ -19,6 +20,7 @@ const AllRoutes = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/Register" element={<Register />} />
           <Route path ="/AddDetails" element={<AddDetails/>}/>
+          <Route path="/admin/login" element={<AdminLogin/>}/>
           <Route path="/admin/manageMember" element={<ManageMembersPage />} />
           <Route path ="admin/PromationCode" element={<PromationCode/>}/>
         </Routes>
