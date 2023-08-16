@@ -111,7 +111,7 @@ const DefaultHeader = () => {
           <Group className={classes.hiddenMobile}>
             <Button
               onClick={() =>
-                window.location.href = '/admin/manageMember'}
+                window.location.href = '/admin/login'}
               style={buttonStyle}>
               Admin Pannel
             </Button>

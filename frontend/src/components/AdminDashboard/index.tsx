@@ -18,7 +18,9 @@ import {
   IconSwitchHorizontal,
   IconLogout,
 } from "@tabler/icons-react";
+import { DiscountCheck } from 'tabler-icons-react';
 import { MantineLogo } from "@mantine/ds";
+
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -101,6 +103,11 @@ const data = [
     icon: IconDatabaseImport,
   },
   { link: "", label: "Adevertisement", icon: IconReceipt2 },
+  {
+    link: "admin/PromationCode",
+    label: "Add Promation Code",
+    icon: DiscountCheck,
+  },
 ];
 
 const NavbarSimple = ({link_id} : any)=> {
@@ -119,7 +126,7 @@ const NavbarSimple = ({link_id} : any)=> {
         setActive(item.label);
       }}
     >
-      <item.icon className={classes.linkIcon} stroke={1.5} />
+      <item.icon className={classes.linkIcon} />
       <span>{item.label}</span>
     </a>
   ));
@@ -135,17 +142,9 @@ const NavbarSimple = ({link_id} : any)=> {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
+       
         <a
-          href="#"
-          className={classes.link}
-          onClick={(event) => event.preventDefault()}
-        >
-          <IconSwitchHorizontal className={classes.linkIcon} stroke={1.5} />
-          <span>Change account</span>
-        </a>
-
-        <a
-          href="#"
+          href="/admin/logout"
           className={classes.link}
           onClick={(event) => event.preventDefault()}
         >
