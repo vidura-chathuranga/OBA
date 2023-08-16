@@ -12,6 +12,7 @@ import {
     Box,
     Modal,
     LoadingOverlay,
+    Select,
 
 } from "@mantine/core";
 import { keys } from "@mantine/utils";
@@ -29,6 +30,7 @@ import { showNotification, updateNotification } from "@mantine/notifications";
 import { useQuery } from "@tanstack/react-query";
 import { DateInput, YearPickerInput } from "@mantine/dates";
 import UserAPI from "../../API/userAPI/user.api";
+import { selectCountryList } from "./coutries";
 
 // styles
 const useStyles = createStyles((theme) => ({
@@ -91,6 +93,14 @@ interface Data {
     jobRole: string;
 
 }
+const jobRoleOptions = [
+    { value: 'it', label: 'IT Professional' },
+    { value: 'doctor', label: 'Doctor' },
+    { value: 'teacher', label: 'Teacher' },
+    { value: 'engineer', label: 'Engineer' },
+    { value: 'writer', label: 'Writer' },
+    { value: 'other', label: 'Other' },
+];
 
 function filterData(data: Data[], search: string) {
     const query = search.toString().toLowerCase().trim();
@@ -109,6 +119,24 @@ const ManageMembers = () => {
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [editOpened, setEditOpened] = useState(false);
     const [sortedData, setSortedData] = useState<Data[]>([]);
+    const [selectedRole, setSelectedRole] = useState('');
+
+
+    const handleSelectChange = (value: any) => {
+        setSelectedRole(value);
+
+        // If "Other" is selected, clear customRole input
+        if (value !== 'other') {
+            editForm.setFieldValue("jobRole", value);
+        }
+
+    };
+
+    const handleCustomRoleChange = (event: any) => {
+        editForm.setFieldValue("jobRole", event.target.value);
+
+
+    };
 
     // use react query and fetch data
     const { data = [], isLoading, isError, refetch, } = useQuery(["memberData"], () => {
@@ -166,9 +194,6 @@ const ManageMembers = () => {
             message: "Please wait while we update member record..",
             autoClose: false,
         });
-
-        // console.log(values)
-
         UserAPI.updateMember(values)
             .then((response) => {
                 updateNotification({
@@ -249,15 +274,19 @@ const ManageMembers = () => {
                     <Text size={15}>{new Date(row.year).getFullYear()}</Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.country}</Text>
-
+                    <Text size={15} style={row.country ? {} : { color: 'red' }}>
+                        {row.country || "NaN"}
+                    </Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.mobile}</Text>
+                    <Text size={15} style={row.mobile ? {} : { color: 'red' }}>
+                        {row.mobile || "NaN"}
+                    </Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.jobRole}</Text>
-
+                    <Text size={15} style={row.jobRole ? {} : { color: 'red' }}>
+                        {row.jobRole || "NaN"}
+                    </Text>
                 </td>
                 <td>
                     {
@@ -319,15 +348,19 @@ const ManageMembers = () => {
 
                 </td>
                 <td>
-                    <Text size={15}>{row.country}</Text>
-
+                    <Text size={15} style={row.country ? {} : { color: 'red' }}>
+                        {row.country || "NaN"}
+                    </Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.mobile}</Text>
+                    <Text size={15} style={row.mobile ? {} : { color: 'red' }}>
+                        {row.mobile || "NaN"}
+                    </Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.jobRole}</Text>
-
+                    <Text size={15} style={row.jobRole ? {} : { color: 'red' }}>
+                        {row.jobRole || "NaN"}
+                    </Text>
                 </td>
                 <td>
                     {
@@ -486,11 +519,11 @@ const ManageMembers = () => {
                         withAsterisk
                         {...editForm.getInputProps("year")}
                     />
-                    <TextInput
-                        label="Country"
-                        placeholder="Enter Country"
+                    <Select data={selectCountryList} searchable
+                        label="Country Of Residence"
+                        placeholder='Sri Lanka'
                         {...editForm.getInputProps("country")}
-                        required
+
                     />
                     <TextInput
                         label="Phone number"
@@ -498,12 +531,24 @@ const ManageMembers = () => {
                         {...editForm.getInputProps("mobile")}
                         required
                     />
-                    <TextInput
-                        label="Job position"
-                        placeholder="Enter job position"
-                        {...editForm.getInputProps("jobRole")}
-                        required
+
+                    <Select
+                        label="Job Role"
+                        placeholder="Pick one"
+                        value={selectedRole}
+                        data={jobRoleOptions}
+                        onChange={(value) => handleSelectChange(value)}
+
                     />
+                    {selectedRole === 'other' && (
+                        <input
+                            type="text"
+
+                            onChange={handleCustomRoleChange}
+                            placeholder="Enter your job role"
+                            style={{ marginTop: '10px', width: '426px', height: '30px', borderRadius: '5px', border: '1px solid #ccc', padding: '5px' }}
+                        />
+                    )}
 
                     <Button
                         color="blue"
