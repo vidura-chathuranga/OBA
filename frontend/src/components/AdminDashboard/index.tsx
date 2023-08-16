@@ -142,17 +142,9 @@ const NavbarSimple = ({link_id} : any)=> {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
+       
         <a
-          href="#"
-          className={classes.link}
-          onClick={(event) => event.preventDefault()}
-        >
-          <IconSwitchHorizontal className={classes.linkIcon} stroke={1.5} />
-          <span>Change account</span>
-        </a>
-
-        <a
-          href="#"
+          href="/admin/logout"
           className={classes.link}
           onClick={(event) => event.preventDefault()}
         >
