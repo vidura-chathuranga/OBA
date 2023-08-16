@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
 
+    company:{
+        type : String,
+    },
+
     jobRole:{
         type:String,
     }

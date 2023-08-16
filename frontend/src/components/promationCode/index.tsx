@@ -12,6 +12,7 @@ import {
     Box,
     Modal,
     LoadingOverlay,
+   
 
 } from "@mantine/core";
 import { keys } from "@mantine/utils";
@@ -27,8 +28,8 @@ import { useRef, useState } from "react";
 import { useForm } from "@mantine/form";
 import { showNotification, updateNotification } from "@mantine/notifications";
 import { useQuery } from "@tanstack/react-query";
-import { DateInput, YearPickerInput } from "@mantine/dates";
 import UserAPI from "../../API/userAPI/user.api";
+
 
 // styles
 const useStyles = createStyles((theme) => ({
@@ -82,13 +83,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface Data {
-    _id: string;
-    name: string;
-    email: string;
-    year: Date;
-    country: string;
-    mobile: string;
-    jobRole: string;
+    
+    shopname: string;
+    discount : string;
+    
 
 }
 
@@ -102,7 +100,7 @@ function filterData(data: Data[], search: string) {
     );
 }
 
-const ManageMembers = () => {
+const PromationCode = () => {
     const [search, setSearch] = useState("");
     const { classes, cx } = useStyles();
     const [scrolled, setScrolled] = useState(false);
@@ -110,15 +108,15 @@ const ManageMembers = () => {
     const [editOpened, setEditOpened] = useState(false);
     const [sortedData, setSortedData] = useState<Data[]>([]);
 
-    // use react query and fetch data
+   // use react query and fetch data
     const { data = [], isLoading, isError, refetch, } = useQuery(["memberData"], () => {
-        return UserAPI.getAllMembers().then((res) => res.data);
+        return UserAPI.getAllCodes().then((res) => res.data);
     },
         { initialData: [] }
     );
 
 
-    // search filter
+    //search filter
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.currentTarget;
         setSearch(value);
@@ -131,13 +129,11 @@ const ManageMembers = () => {
     const editForm = useForm({
         validateInputOnChange: true,
         initialValues: {
-            _id: "",
-            name: "",
-            email: "",
-            year: new Date(),
-            country: "",
-            mobile: "",
-            jobRole: "",
+            
+            shopname: "",
+            discount: "",
+           
+            
         },
     });
 
@@ -145,19 +141,17 @@ const ManageMembers = () => {
     const deleteForm = useForm({
         validateInputOnChange: true,
         initialValues: {
-            _id: "",
+            shopname: "",
+            discount : "",
         },
     });
 
     //update member details  function
     const updateDetails = async (values: {
-        _id: string;
-        name: string;
-        email: string;
-        year: Date;
-        country: string;
-        mobile: string;
-        jobRole: string;
+       
+        shopname: string;
+        discount : string;
+        
     }) => {
         showNotification({
             id: "update-details",
@@ -169,40 +163,40 @@ const ManageMembers = () => {
 
         // console.log(values)
 
-        UserAPI.updateMember(values)
-            .then((response) => {
-                updateNotification({
-                    id: "update-details",
-                    color: "teal",
-                    icon: <IconCheck />,
-                    title: "member updated successfully",
-                    message: "member details updated successfully.",
-                    autoClose: 5000,
-                });
-                editForm.reset();
-                setEditOpened(false);
+        // UserAPI.updateMember(values)
+        //     .then((response) => {
+        //         updateNotification({
+        //             id: "update-details",
+        //             color: "teal",
+        //             icon: <IconCheck />,
+        //             title: "member updated successfully",
+        //             message: "member details updated successfully.",
+        //             autoClose: 5000,
+        //         });
+        //         editForm.reset();
+        //         setEditOpened(false);
 
-                //getting updated data from database
-                refetch();
-            })
-            .catch((error) => {
-                updateNotification({
-                    id: "update-details",
-                    color: "red",
-                    title: "details updating failed",
-                    icon: <IconX />,
-                    message: "We were unable to update the details",
-                    autoClose: 5000,
-                });
-            });
+        //         //getting updated data from database
+        //         refetch();
+        //     })
+        //     .catch((error) => {
+        //         updateNotification({
+        //             id: "update-details",
+        //             color: "red",
+        //             title: "details updating failed",
+        //             icon: <IconX />,
+        //             message: "We were unable to update the details",
+        //             autoClose: 5000,
+        //         });
+        //     });
     };
 
     // delete member function
     const deleteMember = (values: {
-        _id: string;
+        shopname: string;
 
     }) => {
-        UserAPI.deleteMember(values)
+        UserAPI.deleteCode(values)
             .then((res) => {
                 showNotification({
                     title: `Member was deleted`,
@@ -240,25 +234,12 @@ const ManageMembers = () => {
         rows = sortedData?.map((row: any) => (
             <tr key={row._id}>
                 <td>
-                    <Text size={15}>{row.name}</Text>
+                    <Text size={15}>{row.shopname}</Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.email}</Text>
+                    <Text size={15}>{row.discount}</Text>
                 </td>
-                <td>
-                    <Text size={15}>{new Date(row.year).getFullYear()}</Text>
-                </td>
-                <td>
-                    <Text size={15}>{row.country}</Text>
-
-                </td>
-                <td>
-                    <Text size={15}>{row.mobile}</Text>
-                </td>
-                <td>
-                    <Text size={15}>{row.jobRole}</Text>
-
-                </td>
+                
                 <td>
                     {
                         <>
@@ -270,13 +251,10 @@ const ManageMembers = () => {
                                         color="teal"
                                         onClick={() => {
                                             editForm.setValues({
-                                                _id: row._id,
-                                                name: row.name,
-                                                email: row.email,
-                                                year: row.year,
-                                                country: row.country,
-                                                mobile: row.mobile,
-                                                jobRole: row.jobRole,
+                                               
+                                                shopname: row.shopname,
+                                                discount : row.discount,
+                                               
                                             });
                                             setEditOpened(true);
                                         }}
@@ -291,7 +269,7 @@ const ManageMembers = () => {
                                         color="red"
                                         onClick={() => {
                                             deleteForm.setValues({
-                                                _id: row._id,
+                                               shopname: row.shopname,
                                             });
                                             setDeleteOpen(true);
                                         }}
@@ -309,26 +287,12 @@ const ManageMembers = () => {
         rows = data?.map((row: any) => (
             <tr key={row._id}>
                 <td>
-                    <Text size={15}>{row.name}</Text>
+                    <Text size={15}>{row.shopname}</Text>
                 </td>
                 <td>
-                    <Text size={15}>{row.email}</Text>
+                    <Text size={15}>{row.discount}</Text>
                 </td>
-                <td>
-                    <Text size={15}>{new Date(row.year).getFullYear()}</Text>
-
-                </td>
-                <td>
-                    <Text size={15}>{row.country}</Text>
-
-                </td>
-                <td>
-                    <Text size={15}>{row.mobile}</Text>
-                </td>
-                <td>
-                    <Text size={15}>{row.jobRole}</Text>
-
-                </td>
+                
                 <td>
                     {
                         <>
@@ -341,13 +305,10 @@ const ManageMembers = () => {
                                         onClick={() => {
                                             const year = new Date(row.year); // Convert to Date object
                                             editForm.setValues({
-                                                _id: row._id,
-                                                name: row.name,
-                                                email: row.email,
-                                                year: year,
-                                                country: row.country,
-                                                mobile: row.mobile,
-                                                jobRole: row.jobRole,
+                                               
+                                                shopname: row.shopname,
+                                                discount : row.discount,
+                                               
                                             });
                                             setEditOpened(true);
                                         }}
@@ -362,7 +323,7 @@ const ManageMembers = () => {
                                         color="red"
                                         onClick={() => {
                                             deleteForm.setValues({
-                                                _id: row._id,
+                                               shopname: row.shopname,
                                             });
                                             setDeleteOpen(true);
                                         }}
@@ -378,25 +339,27 @@ const ManageMembers = () => {
         ));
     }
     // if data is fetching this overalay will be shows to the user
-    if (isLoading) {
-        return <LoadingOverlay visible={isLoading} overlayBlur={2} />;
-    }
+    // if (isLoading) {
+    //     return <LoadingOverlay visible={isLoading} overlayBlur={2} />;
+    // }
 
-    if (isError) {
-        showNotification({
-            title: "Cannot fetching Stock Data",
-            message: "check internet connection",
-            color: "red",
-            icon: <IconX />,
-            autoClose: 1500,
-        });
-    }
+    // if (isError) {
+    //     showNotification({
+    //         title: "Cannot fetching Stock Data",
+    //         message: "check internet connection",
+    //         color: "red",
+    //         icon: <IconX />,
+    //         autoClose: 1500,
+    //     });
+    // }
 
 
 
     // table
     return (
+       
         <Box
+        
             sx={{ display: "flex", justifyContent: "space-between" }}
             pos="relative"
         >
@@ -424,7 +387,7 @@ const ManageMembers = () => {
                             label="Id"
                             required
                             disabled
-                            {...deleteForm.getInputProps("_id")}
+                            {...deleteForm.getInputProps("shopname")}
                             mb={10}
                         />
 
@@ -466,44 +429,21 @@ const ManageMembers = () => {
                         label="ID"
                         required
                         disabled
-                        {...editForm.getInputProps("_id")}
+                        {...editForm.getInputProps("shopname")}
                     />
                     <TextInput
                         label="Member Name"
                         placeholder="Enter member name"
-                        {...editForm.getInputProps("name")}
+                        {...editForm.getInputProps("shopname")}
                         required
                     />
                     <TextInput
-                        label="Email"
+                        label="discount"
                         placeholder="Enter email"
-                        {...editForm.getInputProps("email")}
+                        {...editForm.getInputProps("discount")}
                         required
                     />
-                    <YearPickerInput
-                        label="Batch Year"
-                        placeholder="Pick date"
-                        withAsterisk
-                        {...editForm.getInputProps("year")}
-                    />
-                    <TextInput
-                        label="Country"
-                        placeholder="Enter Country"
-                        {...editForm.getInputProps("country")}
-                        required
-                    />
-                    <TextInput
-                        label="Phone number"
-                        placeholder="Enter Phone number"
-                        {...editForm.getInputProps("mobile")}
-                        required
-                    />
-                    <TextInput
-                        label="Job position"
-                        placeholder="Enter job position"
-                        {...editForm.getInputProps("jobRole")}
-                        required
-                    />
+                   
 
                     <Button
                         color="blue"
@@ -521,11 +461,13 @@ const ManageMembers = () => {
                         placeholder="Search by any field"
                         icon={<IconSearch size="0.9rem" stroke={1.5} />}
                         value={search}
-                        onChange={handleSearchChange}
+                        // onChange={handleSearchChange}
                         ml={"12%"}
                         w={"60%"}
                     />
+                    <Button>Add Code</Button>
                 </Group>
+                
                 <ScrollArea
                     w={"100mw"}
                     h={600}
@@ -542,12 +484,10 @@ const ManageMembers = () => {
                             className={cx(classes.header, { [classes.scrolled]: scrolled })}
                         >
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Year</th>
-                                <th>Country</th>
-                                <th>Mobile Number</th>
-                                <th>jobRole</th>
+                                <th>Shop Name</th>
+                                <th>Discount</th>
+                                
+                        
                                 <th>Action</th>
 
                             </tr>
@@ -572,4 +512,4 @@ const ManageMembers = () => {
     );
 };
 
-export default ManageMembers;
+export default PromationCode;
