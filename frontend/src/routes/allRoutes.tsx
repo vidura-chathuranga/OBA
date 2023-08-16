@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import LandingPage from "../pages/landing";
 import { Register } from "../components/Register";
 // import NavbarSimple from '../pages/AdminPannel';
+import PromationCode from "../components/promationCode";
 
 import AddDetails from "../pages/AddMyDetails";
 
@@ -19,6 +20,7 @@ const AllRoutes = () => {
           <Route path="/Register" element={<Register />} />
           <Route path ="/AddDetails" element={<AddDetails/>}/>
           <Route path="/admin/manageMember" element={<ManageMembersPage />} />
+          <Route path ="admin/PromationCode" element={<PromationCode/>}/>
         </Routes>
       </Router>
     </QueryClientProvider>
