@@ -15,7 +15,7 @@ const codeSchema = new mongoose.Schema({
    
 },{timestamps : true});
 
-const PromoCode = mongoose.model("code",userSchema);
+const PromoCode = mongoose.model("code",codeSchema);
 
 export default PromoCode;
 
