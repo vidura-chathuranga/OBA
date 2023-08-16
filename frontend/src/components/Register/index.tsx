@@ -257,10 +257,9 @@ export const Register = () => {
                                         {selectedRole === 'other' && (
                                             <input
                                                 type="text"
-
                                                 onChange={handleCustomRoleChange}
                                                 placeholder="Enter your job role"
-                                                style={{ marginTop: '10px', width: '426px', height: '30px', borderRadius: '5px', border: '1px solid #ccc', padding: '5px' }}
+                                                style={{ marginTop: '10px', width: '407px', height: '40px', borderRadius: '5px', border: ' solid #ccc', padding: '5px' }}
                                             />
                                         )}
                                     </div>
