@@ -12,7 +12,7 @@ import {
     Box,
     Modal,
     LoadingOverlay,
-   
+
 
 } from "@mantine/core";
 import { keys } from "@mantine/utils";
@@ -29,6 +29,7 @@ import { useForm } from "@mantine/form";
 import { showNotification, updateNotification } from "@mantine/notifications";
 import { useQuery } from "@tanstack/react-query";
 import UserAPI from "../../API/userAPI/user.api";
+import { response } from "express";
 
 
 // styles
@@ -83,10 +84,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface Data {
-    
+
     shopname: string;
-    discount : string;
-    
+    discount: string;
+
 
 }
 
@@ -106,9 +107,10 @@ const PromationCode = () => {
     const [scrolled, setScrolled] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [editOpened, setEditOpened] = useState(false);
+    const [opened, setOpened] = useState(false);
     const [sortedData, setSortedData] = useState<Data[]>([]);
 
-   // use react query and fetch data
+    // use react query and fetch data
     const { data = [], isLoading, isError, refetch, } = useQuery(["memberData"], () => {
         return UserAPI.getAllCodes().then((res) => res.data);
     },
@@ -125,15 +127,25 @@ const PromationCode = () => {
             setSortedData([]);
         }
     };
+
+    //code add form
+    const addForm = useForm({
+        validateInputOnChange: true,
+        initialValues: {
+            shopname: "",
+            discount: "",
+        },
+    });
+
     //declare edit form
     const editForm = useForm({
         validateInputOnChange: true,
         initialValues: {
-            
+
             shopname: "",
             discount: "",
-           
-            
+
+
         },
     });
 
@@ -142,16 +154,61 @@ const PromationCode = () => {
         validateInputOnChange: true,
         initialValues: {
             shopname: "",
-            discount : "",
+            discount: "",
         },
     });
 
-    //update member details  function
-    const updateDetails = async (values: {
-       
+    //add promotion code function
+    
+    const addCode = async (values: {
+
         shopname: string;
-        discount : string;
-        
+        discount: string;
+
+    }) => {
+        showNotification({
+            id: "add-code",
+            loading: true,
+            title: "Adding code record",
+            message: "Please wait while we add code record..",
+            autoClose: false,
+        });
+        UserAPI.addPromotionCode(values)
+            .then((response) => {
+                updateNotification({
+                    id: "add-code",
+                    color: "teal",
+                    icon: <IconCheck />,
+                    title: "Code added successfully",
+                    message: "Code data added successfully.",
+                    //icon: <IconCheck />,
+                    autoClose: 5000,
+                });
+                addForm.reset();
+                 setOpened(false);
+
+                // refetch data from the database
+                refetch();
+            })
+            .catch((error) => {
+                updateNotification({
+                    id: "add-items",
+                    color: "red",
+                    title: "Items Adding failed",
+                    icon: <IconX />,
+                    message: "We were unable to add the Items",
+                    // icon: <IconAlertTriangle />,
+                    autoClose: 2000,
+                });
+            });
+    };
+
+    //update code details  function
+    const updateDetails = async (values: {
+
+        shopname: string;
+        discount: string;
+
     }) => {
         showNotification({
             id: "update-details",
@@ -161,46 +218,46 @@ const PromationCode = () => {
             autoClose: false,
         });
 
-        // console.log(values)
+        console.log(values)
 
-        // UserAPI.updateMember(values)
-        //     .then((response) => {
-        //         updateNotification({
-        //             id: "update-details",
-        //             color: "teal",
-        //             icon: <IconCheck />,
-        //             title: "member updated successfully",
-        //             message: "member details updated successfully.",
-        //             autoClose: 5000,
-        //         });
-        //         editForm.reset();
-        //         setEditOpened(false);
+        UserAPI.updateCode(values)
+            .then((response) => {
+                updateNotification({
+                    id: "update-details",
+                    color: "teal",
+                    icon: <IconCheck />,
+                    title: "member updated successfully",
+                    message: "member details updated successfully.",
+                    autoClose: 5000,
+                });
+                editForm.reset();
+                setEditOpened(false);
 
-        //         //getting updated data from database
-        //         refetch();
-        //     })
-        //     .catch((error) => {
-        //         updateNotification({
-        //             id: "update-details",
-        //             color: "red",
-        //             title: "details updating failed",
-        //             icon: <IconX />,
-        //             message: "We were unable to update the details",
-        //             autoClose: 5000,
-        //         });
-        //     });
+                //getting updated data from database
+                refetch();
+            })
+            .catch((error) => {
+                updateNotification({
+                    id: "update-details",
+                    color: "red",
+                    title: "details updating failed",
+                    icon: <IconX />,
+                    message: "We were unable to update the details",
+                    autoClose: 5000,
+                });
+            });
     };
 
-    // delete member function
-    const deleteMember = (values: {
+    // delete code function
+    const deleteCode = (values: {
         shopname: string;
 
     }) => {
         UserAPI.deleteCode(values)
             .then((res) => {
                 showNotification({
-                    title: `Member was deleted`,
-                    message: "Member was deleted successfully",
+                    title: `Code was deleted`,
+                    message: "Code was deleted successfully",
                     autoClose: 1500,
                     icon: <IconCheck />,
                     color: "teal",
@@ -239,7 +296,7 @@ const PromationCode = () => {
                 <td>
                     <Text size={15}>{row.discount}</Text>
                 </td>
-                
+
                 <td>
                     {
                         <>
@@ -251,10 +308,10 @@ const PromationCode = () => {
                                         color="teal"
                                         onClick={() => {
                                             editForm.setValues({
-                                               
+
                                                 shopname: row.shopname,
-                                                discount : row.discount,
-                                               
+                                                discount: row.discount,
+
                                             });
                                             setEditOpened(true);
                                         }}
@@ -269,7 +326,7 @@ const PromationCode = () => {
                                         color="red"
                                         onClick={() => {
                                             deleteForm.setValues({
-                                               shopname: row.shopname,
+                                                shopname: row.shopname,
                                             });
                                             setDeleteOpen(true);
                                         }}
@@ -292,7 +349,7 @@ const PromationCode = () => {
                 <td>
                     <Text size={15}>{row.discount}</Text>
                 </td>
-                
+
                 <td>
                     {
                         <>
@@ -303,12 +360,12 @@ const PromationCode = () => {
                                     <ActionIcon
                                         color="teal"
                                         onClick={() => {
-                                            const year = new Date(row.year); // Convert to Date object
+                                            
                                             editForm.setValues({
-                                               
+
                                                 shopname: row.shopname,
-                                                discount : row.discount,
-                                               
+                                                discount: row.discount,
+
                                             });
                                             setEditOpened(true);
                                         }}
@@ -318,12 +375,12 @@ const PromationCode = () => {
                                 </Tooltip>
 
                                 {/* delete button */}
-                                <Tooltip label="Delete member">
+                                <Tooltip label="Delete code">
                                     <ActionIcon
                                         color="red"
                                         onClick={() => {
                                             deleteForm.setValues({
-                                               shopname: row.shopname,
+                                                shopname: row.shopname,
                                             });
                                             setDeleteOpen(true);
                                         }}
@@ -338,28 +395,26 @@ const PromationCode = () => {
             </tr>
         ));
     }
-    // if data is fetching this overalay will be shows to the user
-    // if (isLoading) {
-    //     return <LoadingOverlay visible={isLoading} overlayBlur={2} />;
-    // }
+    //if data is fetching this overalay will be shows to the user
+    if (isLoading) {
+        return <LoadingOverlay visible={isLoading} overlayBlur={2} />;
+    }
 
-    // if (isError) {
-    //     showNotification({
-    //         title: "Cannot fetching Stock Data",
-    //         message: "check internet connection",
-    //         color: "red",
-    //         icon: <IconX />,
-    //         autoClose: 1500,
-    //     });
-    // }
-
-
+    if (isError) {
+        showNotification({
+            title: "Cannot fetching code Data",
+            message: "check internet connection",
+            color: "red",
+            icon: <IconX />,
+            autoClose: 1500,
+        });
+    }
 
     // table
     return (
-       
+
         <Box
-        
+
             sx={{ display: "flex", justifyContent: "space-between" }}
             pos="relative"
         >
@@ -374,12 +429,12 @@ const PromationCode = () => {
             >
                 <Box>
                     <Text size={"sm"} mb={10}>
-                        Are you sure you want to delete this member? This action cannot be
+                        Are you sure you want to delete this code? This action cannot be
                         undone!
                     </Text>
                     <form
                         onSubmit={deleteForm.onSubmit((values) => {
-                            deleteMember(values);
+                            deleteCode(values);
                         })}
                     >
                         <TextInput
@@ -421,16 +476,10 @@ const PromationCode = () => {
                     editForm.reset();
                     setEditOpened(false);
                 }}
-                title="Update member Record"
+                title="Update code Record"
             >
                 <form onSubmit={editForm.onSubmit((values) => updateDetails(values))}>
-                    <TextInput
-                        withAsterisk
-                        label="ID"
-                        required
-                        disabled
-                        {...editForm.getInputProps("shopname")}
-                    />
+                   
                     <TextInput
                         label="Member Name"
                         placeholder="Enter member name"
@@ -443,7 +492,7 @@ const PromationCode = () => {
                         {...editForm.getInputProps("discount")}
                         required
                     />
-                   
+
 
                     <Button
                         color="blue"
@@ -454,6 +503,40 @@ const PromationCode = () => {
                     </Button>
                 </form>
             </Modal>
+
+
+            {/*promo code  add Modal */}
+            <Modal
+                opened={opened}
+                onClose={() => {
+                    addForm.reset();
+                    setOpened(false);
+                }}
+                title="Add code Record"
+            >
+                <form onSubmit={addForm.onSubmit((values) => addCode(values))}>
+                    <TextInput
+                        label="Shop Name"
+                        placeholder="Enter Shop name"
+                        {...addForm.getInputProps("shopname")}
+                        required
+                    />
+                    <TextInput
+                        label="Discount"
+                        placeholder="Discount"
+                        {...addForm.getInputProps("discount")}
+                        required
+                    />
+
+                    <Button
+                        color="blue"
+                        sx={{ marginTop: "10px", width: "100%" }}
+                        type="submit"
+                    >
+                        Add Code
+                    </Button>
+                </form>
+            </Modal>
             <div>
                 <Group spacing={35} mb={70} mt={30}>
                     {/* search bar */}
@@ -461,13 +544,20 @@ const PromationCode = () => {
                         placeholder="Search by any field"
                         icon={<IconSearch size="0.9rem" stroke={1.5} />}
                         value={search}
-                        // onChange={handleSearchChange}
+                        onChange={handleSearchChange}
                         ml={"12%"}
                         w={"60%"}
                     />
-                    <Button>Add Code</Button>
+                    <Button
+                        variant="gradient"
+                        gradient={{ from: "indigo", to: "cyan" }}
+
+                        onClick={() => setOpened(true)}
+                    >
+                        Add Code
+                    </Button>
                 </Group>
-                
+
                 <ScrollArea
                     w={"100mw"}
                     h={600}
@@ -486,8 +576,6 @@ const PromationCode = () => {
                             <tr>
                                 <th>Shop Name</th>
                                 <th>Discount</th>
-                                
-                        
                                 <th>Action</th>
 
                             </tr>
