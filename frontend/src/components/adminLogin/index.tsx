@@ -53,7 +53,8 @@ const AdminLoginComp = () => {
 const adminLogin = (values: { email: string; password: string }) =>{
     
     AdminAPI.loginAdmin(values).then((res) =>{
-        window.localStorage.setItem('admin',JSON.stringify(res.data));
+
+        localStorage.setItem('admin',JSON.stringify(res.data));
 
         window.location.href = '/admin/manageMember';
     }).catch((err)=>{
