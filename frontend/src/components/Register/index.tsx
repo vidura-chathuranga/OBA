@@ -86,6 +86,17 @@ export const Register = () => {
             jobRole: "",
 
         },
+        validate:{
+            name:(value) =>
+                value.length < 2 ? "Name must have at least 2 letters": null,
+            
+            email: (value) =>
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+                value
+                )
+                    ? null
+                    : "Invalid email",
+        }
     });
 
     const registerUser = async (values: {
@@ -188,6 +199,7 @@ export const Register = () => {
                                     <YearPickerInput
                                         label="Batch Year"
                                         placeholder="Pick date"
+                                        required
                                         // value={value}
                                         // onChange={setValue}
                                         {...registerForm.getInputProps("year")}
@@ -214,6 +226,7 @@ export const Register = () => {
                                     <>
                                     <Select data={selectCountryList} searchable
                                         label="Country Of Residence"
+                                        required
                                         placeholder='Sri Lanka'
                                         {...registerForm.getInputProps("country")}
 
@@ -227,6 +240,7 @@ export const Register = () => {
 
                                         label="Mobile No"
                                         placeholder='+9471136106'
+                                        required
                                         {...registerForm.getInputProps("mobile")}
 
 
@@ -238,6 +252,7 @@ export const Register = () => {
                                     <TextInput
 
                                         label="Current Employe Company"
+                                        required
                                         placeholder='Sensus Hub'
                                         {...registerForm.getInputProps("company")}
 
@@ -249,6 +264,7 @@ export const Register = () => {
                                         <Select
                                             label="Job Role"
                                             placeholder="Pick one"
+                                            required
                                             value={selectedRole}
                                             data={jobRoleOptions}
                                             onChange={(value) => handleSelectChange(value)}
@@ -258,6 +274,7 @@ export const Register = () => {
                                             <input
                                                 type="text"
                                                 onChange={handleCustomRoleChange}
+                                                required
                                                 placeholder="Enter your job role"
                                                 style={{ marginTop: '10px', width: '407px', height: '40px', borderRadius: '5px', border: ' solid #ccc', padding: '5px' }}
                                             />

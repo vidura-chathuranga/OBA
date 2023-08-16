@@ -213,8 +213,8 @@ const PromationCode = () => {
         showNotification({
             id: "update-details",
             loading: true,
-            title: "Updating member record",
-            message: "Please wait while we update member record..",
+            title: "Updating code record",
+            message: "Please wait while we update code record..",
             autoClose: false,
         });
 
@@ -226,8 +226,8 @@ const PromationCode = () => {
                     id: "update-details",
                     color: "teal",
                     icon: <IconCheck />,
-                    title: "member updated successfully",
-                    message: "member details updated successfully.",
+                    title: "code updated successfully",
+                    message: "code details updated successfully.",
                     autoClose: 5000,
                 });
                 editForm.reset();
@@ -274,8 +274,8 @@ const PromationCode = () => {
             })
             .catch((err) => {
                 showNotification({
-                    title: `Member was not deleted`,
-                    message: "Member was not deleted",
+                    title: `code was not deleted`,
+                    message: "code was not deleted",
                     autoClose: 1500,
                     icon: <IconX />,
                     color: "red",
@@ -289,7 +289,7 @@ const PromationCode = () => {
     // rows map
     if (sortedData.length > 0) {
         rows = sortedData?.map((row: any) => (
-            <tr key={row._id}>
+            <tr key={row.shopname}>
                 <td>
                     <Text size={15}>{row.shopname}</Text>
                 </td>
@@ -321,7 +321,7 @@ const PromationCode = () => {
                                 </Tooltip>
 
                                 {/* delete button */}
-                                <Tooltip label="Delete member">
+                                <Tooltip label="Delete Code">
                                     <ActionIcon
                                         color="red"
                                         onClick={() => {
@@ -342,7 +342,7 @@ const PromationCode = () => {
         ));
     } else {
         rows = data?.map((row: any) => (
-            <tr key={row._id}>
+            <tr key={row.shopname}>
                 <td>
                     <Text size={15}>{row.shopname}</Text>
                 </td>
@@ -425,7 +425,7 @@ const PromationCode = () => {
                 onClose={() => {
                     setDeleteOpen(false);
                 }}
-                title="Delete member"
+                title="Delete Code"
             >
                 <Box>
                     <Text size={"sm"} mb={10}>
@@ -439,7 +439,7 @@ const PromationCode = () => {
                     >
                         <TextInput
                             withAsterisk
-                            label="Id"
+                            label="Shop Name"
                             required
                             disabled
                             {...deleteForm.getInputProps("shopname")}
@@ -469,7 +469,7 @@ const PromationCode = () => {
                 </Box>
             </Modal>
 
-            {/* member edit model */}
+            {/* code edit model */}
             <Modal
                 opened={editOpened}
                 onClose={() => {
@@ -481,13 +481,13 @@ const PromationCode = () => {
                 <form onSubmit={editForm.onSubmit((values) => updateDetails(values))}>
                    
                     <TextInput
-                        label="Member Name"
-                        placeholder="Enter member name"
+                        label="Code Name"
+                        placeholder="Enter code name"
                         {...editForm.getInputProps("shopname")}
                         required
                     />
                     <TextInput
-                        label="discount"
+                        label="Discount"
                         placeholder="Enter email"
                         {...editForm.getInputProps("discount")}
                         required
@@ -499,7 +499,7 @@ const PromationCode = () => {
                         sx={{ marginTop: "10px", width: "100%" }}
                         type="submit"
                     >
-                        Save
+                        Update
                     </Button>
                 </form>
             </Modal>
