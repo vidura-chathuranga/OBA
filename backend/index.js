@@ -4,13 +4,17 @@ import cors from 'cors';
 import DBCON from './configs/dbConfig.js';
 import UserRoutes from "./routes/user.routes.js"
 import AdminRoutes from './routes/admin.routes.js';
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 const PORT = process.env.PORT || 6001;
 
 // initialize the cors
-app.use(cors())
+app.use(cors({credentials : true,origin : 'http://localhost:3000'}))
+
+// cookie parser config
+app.use(cookieParser());
 
 //initialize the json
 app.use(express.json());
