@@ -252,5 +252,3 @@ const coutries = [
 ];
 
 export const selectCountryList = coutries.map((country) =>({value : country, label : country}));
-
-console.log(selectCountryList);
