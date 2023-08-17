@@ -20,6 +20,7 @@ import {
 } from "@tabler/icons-react";
 import { DiscountCheck } from 'tabler-icons-react';
 import { MantineLogo } from "@mantine/ds";
+import { Navigate } from "react-router-dom";
 
 
 const useStyles = createStyles((theme) => ({
@@ -102,9 +103,9 @@ const data = [
     label: "Manage Members",
     icon: IconDatabaseImport,
   },
-  { link: "", label: "Adevertisement", icon: IconReceipt2 },
+  { link: "/admin/advertisement", label: "Adevertisement", icon: IconReceipt2 },
   {
-    link: "admin/PromationCode",
+    link: "/admin/PromationCode",
     label: "Add Promation Code",
     icon: DiscountCheck,
   },
@@ -122,8 +123,8 @@ const NavbarSimple = ({link_id} : any)=> {
       href={item.link}
       key={item.label}
       onClick={(event) => {
-        event.preventDefault();
         setActive(item.label);
+        window.location.href=item.link;
       }}
     >
       <item.icon className={classes.linkIcon} />
