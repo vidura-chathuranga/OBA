@@ -105,7 +105,7 @@ const data = [
   },
   { link: "/admin/advertisement", label: "Adevertisement", icon: IconReceipt2 },
   {
-    link: "/admin/PromationCode",
+    link: "/admin/PromotionCodeManage",
     label: "Add Promation Code",
     icon: DiscountCheck,
   },
