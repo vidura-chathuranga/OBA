@@ -3,6 +3,7 @@ import LandingCarousel from "../components/Carousel";
 import DefaultHeader from "../components/defaultHeader";
 import Vision from "../components/Vision";
 import Mission from "../components/Mission";
+import Footer from '../components/footer/footer'
 const LandingPage = () => {
   return (
     <>
@@ -14,6 +15,8 @@ const LandingPage = () => {
     </Grid>
     <Vision/>
     <Mission/>
+    <Footer/>
+
     
     </>
   );

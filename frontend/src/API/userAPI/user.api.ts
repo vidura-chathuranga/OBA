@@ -42,9 +42,9 @@ class UserAPI{
 
       
     //Add promoation code 
-    static promotionCode(values :{shopname: string,discount: string}){
+    static addPromotionCode(values :{shopname: string,discount: string}){
         console.log(values);
-        return axios.post(`${BASE_URL}/admin/PromationCode`,values);
+        return axios.post(`${BASE_URL}/code/addpromo`,values);
     }
 
       //get all promotion code
@@ -54,20 +54,23 @@ class UserAPI{
 
     //delete Promo code
     static deleteCode = (values:{
-        shopname: string;
+        
+        _id: string;
     }) => {
-        return axios.delete(`${BASE_URL}/admin/code/delete/${values.shopname}`);
+        console.log("delete code");
+        return axios.delete(`${BASE_URL}/code/delete/${values._id}`);
       };
 
       //update user
     static updateCode = (values:{
-       
+
+        _id : string;
         shopname: string;
         discount : string;
        
     }) =>{
         console.log(values);
-        return axios.put(`${BASE_URL}/admin/code/update/${values.shopname}`,values);
+        return axios.put(`${BASE_URL}/code/update/${values._id}`,values);
     }
 
 

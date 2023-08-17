@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LandingPage from "../pages/landing";
 import { Register } from "../components/Register";
+import PromotionCodeManage from "../pages/PromotionCode";
 // import NavbarSimple from '../pages/AdminPannel';
 
 import PromationCode from "../components/promationCode";
@@ -25,7 +26,7 @@ const AllRoutes = () => {
           <Route path="/Register" element={<Register />} />
           <Route path="/AddDetails" element={<AddDetails />} />
           <Route path="/admin/login" element={<AdminLogin />} />
-
+          
           <Route path="/admin/" element={<AdminPrivateRoutes />}>
             <Route path="/admin/manageMember" element={<ManageMembersPage />} />
             <Route path="/admin/advertisement" element ={<ManageAdvertisementPage/>}/>
