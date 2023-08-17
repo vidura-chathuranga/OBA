@@ -26,11 +26,11 @@ const AllRoutes = () => {
           <Route path="/Register" element={<Register />} />
           <Route path="/AddDetails" element={<AddDetails />} />
           <Route path="/admin/login" element={<AdminLogin />} />
-          
+
           <Route path="/admin/" element={<AdminPrivateRoutes />}>
             <Route path="/admin/manageMember" element={<ManageMembersPage />} />
             <Route path="/admin/advertisement" element ={<ManageAdvertisementPage/>}/>
-            <Route path="/admin/PromationCode" element={<PromationCode />} />
+            <Route path="/admin/PromotionCodeManage" element={<PromotionCodeManage />} />
 
             <Route path="/admin/logout" element={<Adminlogout />} />
           </Route>

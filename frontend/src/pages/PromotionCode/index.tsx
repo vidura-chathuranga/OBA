@@ -13,12 +13,7 @@ const PromotionCodeManage = () => {
         <Grid.Col span={"auto"}>
             <PromationCode />
         </Grid.Col>
-
-
-        
       </Grid>
-
-      
     </div>
     );
   };
