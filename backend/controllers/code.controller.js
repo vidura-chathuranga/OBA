@@ -31,14 +31,12 @@ export const getAllPromoCode = async (req,res) => {
 };
 
 export const deleteCode = async(req,res) => {
-    const shopname = req.body.shopname; //get the shop name
+    const _id = req.params.id;
+   
 
     try{
-        const deletedCode = await PromoCode.findByIdAndDelete(shopname);
-        if(!deleteCode){
-        //if promo code is not found, send a 404 status code with a message
-        return res.status(404).json({message:"Shop not found"});
-        }
+        const deletedCode = await PromoCode.findByIdAndDelete(_id);
+        
         res.status(200).json({ message: "Promotion Code deleted successfully" });
 
     }catch(error){
@@ -48,24 +46,28 @@ export const deleteCode = async(req,res) => {
 }
 
 export const updateCode = async(req,res) =>{
+
+    const id = req.params.id;
     const updateFields = {
+
         shopname : req.body.shopname,
         discount : req.body.discount,
 
     };
 
     try{
+        
         const updatedCode = await PromoCode.findByIdAndUpdate(
-            shopname,
+            
+            id,
             updateFields,
             {new:true}
         );
 
-        if(!updatedCode){
-            //If code is not found , send 404 status code with a message
-            return res.status(404).json({message:"Code not found"});
-        }
-        res.status(200).json(updateCode); // Send the updated code as the response
+        console.log(updatedCode);
+
+       
+        res.status(200).json(updatedCode); // Send the updated code as the response
 
     }catch(error){
         res.status(500).json({ message: "Failed to update code", error });

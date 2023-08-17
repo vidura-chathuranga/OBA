@@ -5,8 +5,8 @@ const Router = express.Router();
 
 Router.post("/addpromo",addCode);
 Router.get("/",getAllPromoCode);
-Router.delete("/",deleteCode);
-Router.put("/update",updateCode);
+Router.delete("/delete/:id",deleteCode);
+Router.put("/update/:id",updateCode);
 
 
 export default Router;

@@ -85,6 +85,7 @@ const useStyles = createStyles((theme) => ({
 
 interface Data {
 
+    _id:string;
     shopname: string;
     discount: string;
 
@@ -132,6 +133,7 @@ const PromationCode = () => {
     const addForm = useForm({
         validateInputOnChange: true,
         initialValues: {
+
             shopname: "",
             discount: "",
         },
@@ -142,6 +144,7 @@ const PromationCode = () => {
         validateInputOnChange: true,
         initialValues: {
 
+            _id : "",
             shopname: "",
             discount: "",
 
@@ -153,8 +156,9 @@ const PromationCode = () => {
     const deleteForm = useForm({
         validateInputOnChange: true,
         initialValues: {
-            shopname: "",
-            discount: "",
+            _id :"",
+            
+            
         },
     });
 
@@ -206,6 +210,7 @@ const PromationCode = () => {
     //update code details  function
     const updateDetails = async (values: {
 
+        _id : string;
         shopname: string;
         discount: string;
 
@@ -218,7 +223,7 @@ const PromationCode = () => {
             autoClose: false,
         });
 
-        console.log(values)
+        console.log(values._id)
 
         UserAPI.updateCode(values)
             .then((response) => {
@@ -250,7 +255,8 @@ const PromationCode = () => {
 
     // delete code function
     const deleteCode = (values: {
-        shopname: string;
+        _id : string;
+       
 
     }) => {
         UserAPI.deleteCode(values)
@@ -289,7 +295,7 @@ const PromationCode = () => {
     // rows map
     if (sortedData.length > 0) {
         rows = sortedData?.map((row: any) => (
-            <tr key={row.shopname}>
+            <tr key={row._id}>
                 <td>
                     <Text size={15}>{row.shopname}</Text>
                 </td>
@@ -326,7 +332,7 @@ const PromationCode = () => {
                                         color="red"
                                         onClick={() => {
                                             deleteForm.setValues({
-                                                shopname: row.shopname,
+                                                _id: row._id,
                                             });
                                             setDeleteOpen(true);
                                         }}
@@ -342,7 +348,7 @@ const PromationCode = () => {
         ));
     } else {
         rows = data?.map((row: any) => (
-            <tr key={row.shopname}>
+            <tr key={row._id}>
                 <td>
                     <Text size={15}>{row.shopname}</Text>
                 </td>
@@ -363,6 +369,7 @@ const PromationCode = () => {
                                             
                                             editForm.setValues({
 
+                                                _id:row._id,
                                                 shopname: row.shopname,
                                                 discount: row.discount,
 
@@ -380,7 +387,7 @@ const PromationCode = () => {
                                         color="red"
                                         onClick={() => {
                                             deleteForm.setValues({
-                                                shopname: row.shopname,
+                                                _id: row._id,
                                             });
                                             setDeleteOpen(true);
                                         }}
@@ -479,6 +486,8 @@ const PromationCode = () => {
                 title="Update code Record"
             >
                 <form onSubmit={editForm.onSubmit((values) => updateDetails(values))}>
+
+
                    
                     <TextInput
                         label="Code Name"
