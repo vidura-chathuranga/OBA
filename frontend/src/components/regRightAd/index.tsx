@@ -38,12 +38,14 @@ import {
         </Group>
       );
     });
-  
+    
+
+
     return (
       <Card withBorder shadow="xl" mt={30}>
         <Card.Section withBorder p={10}>
           <Title order={2} align="center">
-            Front Advertisement
+            R-Right Advertisement
           </Title>
         </Card.Section>
         <Card.Section p={20}>
@@ -90,7 +92,7 @@ import {
               </Dropzone.Idle>
   
               <div>
-                <Text size="xl" inline>
+                <Text size="xl" align="center">
                   Drag image here or click to select files
                 </Text>
               </div>

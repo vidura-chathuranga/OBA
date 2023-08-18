@@ -150,7 +150,7 @@ const NavbarSimple = ({link_id} : any)=> {
           onClick={(event) => event.preventDefault()}
         >
           <IconLogout className={classes.linkIcon} stroke={1.5} />
-          <span>Logout</span>
+          <span onClick={() =>window.location.href='/admin/logout'}>Logout</span>
         </a>
       </Navbar.Section>
     </Navbar>

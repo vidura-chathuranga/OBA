@@ -5,7 +5,7 @@ import { IconX } from "@tabler/icons-react";
 
 const adminlogout = async () => {
   // remove the local storage data in current user
-  localStorage.removeItem("user-worker-session");
+  localStorage.removeItem("admin");
 
   // clear the accessToken
   AdminAPI.logout().then((res) => {
