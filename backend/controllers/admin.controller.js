@@ -10,7 +10,7 @@ export const adminLogin = async (req, res) => {
       if (bcrypt.compareSync(req.body.password, admin[0].password)) {
         // create access Token
         const accessToken = jwt.sign(
-          { _id: admin[0]._id, email: admin[0].email },
+          { _id: admin[0]._id, email: admin[0].email,role : "ADMIN"},
           process.env.SECRET_KEY,
           { expiresIn: 24 * 60 * 60 }
         ); //access Token will expires in 1 day

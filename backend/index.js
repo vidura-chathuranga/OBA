@@ -6,7 +6,7 @@ import UserRoutes from "./routes/user.routes.js";
 import CodeRoutes from './routes/code.routes.js';
 import AdminRoutes from './routes/admin.routes.js';
 import cookieParser from "cookie-parser";
-
+import AdRoutes from "./routes/advertisement.routes.js";
 
 const app = express();
 
@@ -19,10 +19,10 @@ app.use(cors({credentials : true,origin : 'http://localhost:3000'}))
 app.use(cookieParser());
 
 //initialize the json
-app.use(express.json());
+app.use(express.json({limit : '50mb'}));
 
 // config the urlEncoded middleware
-app.use(express.urlencoded({extended : false}));
+app.use(express.urlencoded({extended : false,limit : '50mb'}));
 
 app.use((req,res,next)=>{
     console.log(`${req.method} =====> URL: ${req.url}`);
@@ -36,6 +36,7 @@ app.get('/',(req,res)=>{
 app.use('/user',UserRoutes);
 app.use('/admin',AdminRoutes);
 app.use('/code',CodeRoutes);
+app.use('/advertisement',AdRoutes);
 
 app.listen(PORT,()=>{
     console.log(`🚀 Server is started on port ${PORT}`);

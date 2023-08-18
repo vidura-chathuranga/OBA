@@ -17,7 +17,7 @@ const adminModel = new mongoose.Schema({
     password : {
         type : String,
         required : true
-    }
+    },
 });
 
 const Admin = mongoose.model('admins',adminModel);

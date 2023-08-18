@@ -90,7 +90,7 @@ const RegisterLeftAdvertisement = () => {
             </Dropzone.Idle>
 
             <div>
-              <Text size="xl" inline>
+              <Text size="xl" align="center">
                 Drag image here or click to select files
               </Text>
             </div>
