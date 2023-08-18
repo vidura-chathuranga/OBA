@@ -1,11 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useRef } from "react";
 import AdAPI from "../../API/AdvertisementAPI";
-import { showNotification } from "@mantine/notifications";
-import { Box, Card, Image, LoadingOverlay, Skeleton } from "@mantine/core";
-import img1 from "../../assets/carouselImages/2.jpg";
+import { Image, Skeleton,createStyles, getStylesRef } from "@mantine/core";
+import { Carousel } from "@mantine/carousel";
+import Autoplay from "embla-carousel-autoplay";
+
+const useStyles = createStyles(() => ({
+  controls: {
+    ref: getStylesRef('controls'),
+    transition: 'opacity 150ms ease',
+    opacity: 0,
+  },
+
+  root: {
+    '&:hover': {
+      [`& .${getStylesRef('controls')}`]: {
+        opacity: 1,
+      },
+    },
+  },
+}));
 
 const ShowInLandingPage = () => {
+  const { classes } = useStyles();
+  const autoplay = useRef(Autoplay({ delay: 2000 }));
+
   const {
     data = [],
     isError,
@@ -25,15 +44,30 @@ const ShowInLandingPage = () => {
     return <Skeleton height={"75vh"} />;
   }
 
-  const ads = data.map((ad: any, index: number) => {
+  const slides = data.map((ad: any, index: number) => {
     return (
-      <Box style={{ border: "1px solid black" }} key={index}>
-        <Image src={ad.image} key={index} height={"75vh"} />
-      </Box>
+      <Carousel.Slide key={index} style={{borderRadius : "50%"}}>
+        <Image src={ad.image} height={"75vh"} />
+      </Carousel.Slide>
     );
   });
 
-  return <div>{data.length > 0 ? ads : null}</div>;
+  return (
+    <Carousel
+      withIndicators
+      loop
+      draggable
+      controlSize={22}
+      classNames={classes}
+      height={"75vh"}
+      plugins={[autoplay.current]}
+      onMouseEnter={autoplay.current.stop}
+      onMouseLeave={autoplay.current.reset}
+      style={{borderRadius : "50%"}}
+    >
+      {slides}
+    </Carousel>
+  );
 };
 
 export default ShowInLandingPage;
