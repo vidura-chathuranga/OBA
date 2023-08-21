@@ -42,6 +42,7 @@ export const Register = () => {
     const [value, setValue] = useState<Date | null>(null);
     const [selectedRole, setSelectedRole] = useState('');
     const [isSwitchOn , setSwitchOn] = useState(false);
+    
 
 
     const toggleSwitch = () =>{
@@ -235,7 +236,7 @@ export const Register = () => {
 
 
 
-                                {isSwitchOn && (
+                                {isSwitchOn ?  (
                                     <>
                                     <Select data={selectCountryList} searchable
                                         label="Country Of Residence"
@@ -293,13 +294,20 @@ export const Register = () => {
                                             />
                                         )}
                                     </div>
+                                    <Button fullWidth mt="xl" type="submit">
+                                        Next
+                                    </Button>
+                                    
                                     </>
 
-                                    )}
-
+                                ):(
                                     <Button fullWidth mt="xl" type="submit">
-                                        Submit
+                                    Submit
                                     </Button>
+
+                                )}
+
+                                   
 
                                 </Paper>
                             </form>
