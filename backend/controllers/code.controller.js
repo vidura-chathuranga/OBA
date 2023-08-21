@@ -6,6 +6,8 @@ export const addCode = async (req,res) =>{
         const newCode = new PromoCode({
             shopname : req.body.shopname,
             discount : req.body.discount,
+            count : req.body.count,
+            details : req.body.details,
         });
 
         //save new code detials in the database
@@ -33,9 +35,8 @@ export const getAllPromoCode = async (req,res) => {
 export const deleteCode = async(req,res) => {
     const _id = req.params.id;
    
-
     try{
-        const deletedCode = await PromoCode.findByIdAndDelete(_id);
+        const deleteCode = await PromoCode.findByIdAndDelete(_id);
         
         res.status(200).json({ message: "Promotion Code deleted successfully" });
 
@@ -52,6 +53,8 @@ export const updateCode = async(req,res) =>{
 
         shopname : req.body.shopname,
         discount : req.body.discount,
+        count : req.body.count,
+        details : req.body.details,
 
     };
 
