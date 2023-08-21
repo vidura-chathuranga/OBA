@@ -10,6 +10,16 @@ const codeSchema = new mongoose.Schema({
     discount:{
         type : String,
         required : true,
+    },
+
+    count:{
+        type : String,
+        required : true,
+    },
+
+    details:{
+        type : String,
+        required : true,
     }
 
    
