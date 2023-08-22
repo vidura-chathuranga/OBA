@@ -1,87 +1,25 @@
-import { createStyles, Card, Overlay, CardProps, Button, Text, rem } from '@mantine/core';
+import { Button, Paper, Text, Group, CloseButton } from '@mantine/core';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    height: rem(240),
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  },
-
-  content: {
-    ...theme.fn.cover(),
-    padding: theme.spacing.xl,
-    zIndex: 1,
-  },
-
-  action: {
-    position: 'absolute',
-    bottom: theme.spacing.xl,
-    right: theme.spacing.xl,
-  },
-
-  title: {
-    color: theme.white,
-    marginBottom: `calc(${theme.spacing.xs} / 2)`,
-  },
-
-  description: {
-    color: theme.white,
-    maxWidth: rem(220),
-  },
-}));
-
-interface ImageActionBannerProps {
-  title: React.ReactNode;
-  description: React.ReactNode;
-  image: string;
-  action: {
-    label: string;
-    link: string;
-  };
-}
-
-export function PromoCodeCard({
-  title,
-  description,
-  image,
-  action,
-  ...others
-}: ImageActionBannerProps & Omit<CardProps, keyof ImageActionBannerProps | 'children'>) {
-  const { classes, cx, theme } = useStyles();
-
+export function PromoCard() {
   return (
-    <Card
-      radius="md"
-      // style={{ backgroundImage: `url(${image})`, ...style }}
-      // className={cx(classes.card, className)}
-      {...others}
-    >
-      <Overlay
-        gradient={`linear-gradient(105deg, ${theme.black} 20%, #312f2f 50%, ${theme.colors.gray[4]} 100%)`}
-        opacity={0.55}
-        zIndex={0}
-      />
-
-      <div className={classes.content}>
-        <Text size="lg" weight={700} className={classes.title}>
-          {title}
+    <Paper withBorder p="lg" radius="md" shadow="md">
+      <Group position="apart" mb="xs">
+        <Text fz="md" fw={500}>
+          Promo Card 1
         </Text>
-
-        <Text size="sm" className={classes.description}>
-          {description}
-        </Text>
-
-        <Button
-          className={classes.action}
-          variant="white"
-          color="dark"
-          component="a"
-          size="xs"
-          href={action.link}
-        >
-          {action.label}
+        
+      </Group>
+      <Text c="dimmed" fz="xs">
+        <h3>Shop Name  -</h3>
+        <h3>Discount   - </h3>
+        <h3>Details    - </h3>
+      </Text>
+      <Group position="right" mt="md">
+       
+        <Button variant="outline" size="xs">
+          Get Promotion
         </Button>
-      </div>
-    </Card>
+      </Group>
+    </Paper>
   );
 }

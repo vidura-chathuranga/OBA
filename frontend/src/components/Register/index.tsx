@@ -33,7 +33,8 @@ import { useState } from "react";
 import { YearPickerInput } from '@mantine/dates';
 import { selectCountryList } from "../../components/Register/coutries";
 import UserAPI from '../../API/userAPI/user.api';
-import { PromoCodeCard } from '../PromoCodeCard/card';
+import { PromoCard } from '../PromoCodeCard/card';
+
 
 
 
@@ -42,6 +43,7 @@ export const Register = () => {
     const [value, setValue] = useState<Date | null>(null);
     const [selectedRole, setSelectedRole] = useState('');
     const [isSwitchOn , setSwitchOn] = useState(false);
+    
 
 
     const toggleSwitch = () =>{
@@ -235,7 +237,7 @@ export const Register = () => {
 
 
 
-                                {isSwitchOn && (
+                                {isSwitchOn ?  (
                                     <>
                                     <Select data={selectCountryList} searchable
                                         label="Country Of Residence"
@@ -259,17 +261,12 @@ export const Register = () => {
 
                                     />
                                    
-                                   
-                                    
-
                                     <TextInput
 
                                         label="Current Employe Company"
                                         required
                                         placeholder='Sensus Hub'
                                         {...registerForm.getInputProps("company")}
-
-
                                     />
 
                                     <div>
@@ -293,17 +290,26 @@ export const Register = () => {
                                             />
                                         )}
                                     </div>
+                                    <Button fullWidth mt="xl" type="submit">
+                                        Next
+                                    </Button>
+                                    
                                     </>
 
-                                    )}
-
+                                ):(
                                     <Button fullWidth mt="xl" type="submit">
-                                        Submit
+                                    Submit
                                     </Button>
+
+                                )}
+
+                                   
 
                                 </Paper>
                             </form>
                         </div>
+
+                        {/* <PromoCard/> */}
 
 
                     </Container>
