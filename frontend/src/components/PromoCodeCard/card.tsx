@@ -1,6 +1,52 @@
-import { Button, Paper, Text, Group, CloseButton } from '@mantine/core';
+import { Button, Paper, Text, Group, CloseButton, TextInput } from '@mantine/core';
+import UserAPI from '../../API/userAPI/user.api';
+import { useQuery } from "@tanstack/react-query";
+import { useForm } from '@mantine/form';
+import { showNotification, updateNotification } from "@mantine/notifications";
+import { useRef, useState } from "react";
+
+import {
+  IconSearch,
+  IconEdit,
+  IconTrash,
+  IconX,
+  IconCheck,
+
+} from "@tabler/icons-react";
+
+
+interface Data {
+
+  _id:string;
+  shopname: string;
+  discount: string;
+  count : string;
+  details : string;
+
+}
 
 export function PromoCard() {
+  const [opened, setOpened] = useState(false);
+
+  // use react query and fetch data
+  const { data = [], isLoading, isError, refetch, } = useQuery(["promoData"], () => {
+    return UserAPI.getAllCodes().then((res) => res.data);
+},
+    { initialData: [] }
+);
+
+const viewForm = useForm({
+  validateInputOnChange:true,
+  initialValues:{
+            shopname: "",
+            discount: "",
+            count : "",
+            details : "",
+
+  },
+
+});
+
   return (
     <Paper withBorder p="lg" radius="md" shadow="md">
       <Group position="apart" mb="xs">
@@ -10,9 +56,20 @@ export function PromoCard() {
         
       </Group>
       <Text c="dimmed" fz="xs">
-        <h3>Shop Name  -</h3>
-        <h3>Discount   - </h3>
-        <h3>Details    - </h3>
+        <TextInput
+          
+          label = "Shop Name"
+          {...viewForm.getInputProps("shopname")}
+        />
+         <TextInput
+          label = "Discount"
+          {...viewForm.getInputProps("discount")}
+        />
+         <TextInput
+          label = "Details"
+          {...viewForm.getInputProps("details")}
+        />
+      
       </Text>
       <Group position="right" mt="md">
        
