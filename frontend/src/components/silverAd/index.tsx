@@ -21,7 +21,7 @@ import { IconCheck, IconPhoto, IconUpload, IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import AdAPI from "../../API/AdvertisementAPI";
 
-const FrontLeftAdvertisement = () => {
+const SilverAdvertisement = () => {
   const theme = useMantineTheme();
   const [files, setFiles] = useState<FileWithPath[]>([]);
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ const FrontLeftAdvertisement = () => {
     imageUrl = URL.createObjectURL(file);
 
     return (
-      <Group position="center" key={index}>
+      <Group position="center">
         <Image
           src={imageUrl}
           key={index}
@@ -62,7 +62,7 @@ const FrontLeftAdvertisement = () => {
       setLoading(true);
       const base64 = await convertBase64();
 
-      AdAPI.createAdvertisement(base64, "FRONTLEFT").then((res) => {
+      AdAPI.createAdvertisement(base64, "FRONTBOTTOM").then((res) => {
         setLoading(false);
 
         showNotification({
@@ -92,7 +92,7 @@ const FrontLeftAdvertisement = () => {
       <Card withBorder shadow="xl" mt={30}>
         <Card.Section withBorder p={10}>
           <Title order={2} align="center">
-            Gold Advertisement
+            Silver Advertisement
           </Title>
         </Card.Section>
         <Card.Section p={20}>
@@ -162,4 +162,4 @@ const FrontLeftAdvertisement = () => {
   );
 };
 
-export default FrontLeftAdvertisement;
+export default SilverAdvertisement;

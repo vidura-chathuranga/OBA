@@ -15,6 +15,11 @@ class AdAPI {
     static getFrontLeftAd = () =>{
         return newAxios.get('/advertisement/frontLeft');
     }
+
+    static getSilverAd = () => {
+        console.log("API add")
+        return newAxios.get('/advertisement/silverAd');
+    }
 }
 
 export default AdAPI;

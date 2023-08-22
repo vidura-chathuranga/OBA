@@ -1,14 +1,14 @@
 import { Group, SimpleGrid } from "@mantine/core";
 import FrontLeftAdvertisement from "../frontLeftAd";
-import RegisterLeftAdvertisement from "../regLeftAd";
+import SilverAdvertisement from "../silverAd";
 import RegisterRightAdvertisement from "../regRightAd";
 
 const ManageAdvertisement = () => {
   return (
-    <SimpleGrid cols={3}>
+    <SimpleGrid cols={2}>
       <FrontLeftAdvertisement />
-      <RegisterLeftAdvertisement />
-      <RegisterRightAdvertisement />
+      <SilverAdvertisement />
+      {/* <RegisterRightAdvertisement /> */}
     </SimpleGrid>
   );
 };
