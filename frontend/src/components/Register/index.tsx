@@ -34,6 +34,7 @@ import { YearPickerInput } from '@mantine/dates';
 import { selectCountryList } from "../../components/Register/coutries";
 import UserAPI from '../../API/userAPI/user.api';
 import { PromoCard } from '../PromoCodeCard/card';
+import ViewPromotionDetails from '../promationCode/viewPromotionDetails';
 
 
 
@@ -43,6 +44,15 @@ export const Register = () => {
     const [value, setValue] = useState<Date | null>(null);
     const [selectedRole, setSelectedRole] = useState('');
     const [isSwitchOn , setSwitchOn] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
     
 
 
@@ -290,7 +300,7 @@ export const Register = () => {
                                             />
                                         )}
                                     </div>
-                                    <Button fullWidth mt="xl" type="submit">
+                                    <Button fullWidth mt="xl" type="button" onClick={openModal}>
                                         Next
                                     </Button>
                                     
@@ -310,11 +320,16 @@ export const Register = () => {
                         </div>
 
                         {/* <PromoCard/> */}
+                        {/* Modal */}
+                     
 
 
                     </Container>
                 </div>
             </div> 
+            <Modal opened={isModalOpen} onClose={closeModal} size={1100}>
+                <ViewPromotionDetails />
+            </Modal>
 
         </>
     );
