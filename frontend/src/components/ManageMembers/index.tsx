@@ -13,6 +13,7 @@ import {
     Modal,
     LoadingOverlay,
     Select,
+    Grid,
 
 } from "@mantine/core";
 import { keys } from "@mantine/utils";
@@ -32,6 +33,14 @@ import { DateInput, YearPickerInput } from "@mantine/dates";
 import UserAPI from "../../API/userAPI/user.api";
 import { selectCountryList } from "./coutries";
 
+const buttonStyle = {
+    backgroundColor: 'white',   // Change the background color to red
+    color: 'blue',           // Change the text color to white
+    padding: '10px 20px',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer'
+};
 // styles
 const useStyles = createStyles((theme) => ({
     th: {
@@ -103,6 +112,7 @@ const jobRoleOptions = [
     { value: 'other', label: 'Other' },
 ];
 
+
 function filterData(data: Data[], search: string) {
     const query = search.toString().toLowerCase().trim();
 
@@ -119,9 +129,9 @@ const ManageMembers = () => {
     const [scrolled, setScrolled] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [editOpened, setEditOpened] = useState(false);
+    const [regOpened, setRegOpened] = useState(false);
     const [sortedData, setSortedData] = useState<Data[]>([]);
     const [selectedRole, setSelectedRole] = useState('');
-
 
     const handleSelectChange = (value: any) => {
         setSelectedRole(value);
@@ -129,12 +139,14 @@ const ManageMembers = () => {
         // If "Other" is selected, clear customRole input
         if (value !== 'other') {
             editForm.setFieldValue("jobRole", value);
+            registerForm.setFieldValue("jobRole",value);
         }
 
     };
 
     const handleCustomRoleChange = (event: any) => {
         editForm.setFieldValue("jobRole", event.target.value);
+        registerForm.setFieldValue("jobRole", event.target.value);
 
 
     };
@@ -156,6 +168,35 @@ const ManageMembers = () => {
             setSortedData([]);
         }
     };
+
+
+    //User Register form
+    const registerForm = useForm({
+        validateInputOnChange: true,
+
+        initialValues: {
+            name: "",
+            email: "",
+            year: "",
+            country: "",
+            mobile: "",
+            company: "",
+            jobRole: "",
+
+        },
+        validate: {
+            name: (value) =>
+                value.length < 2 ? "Name must have at least 2 letters" : null,
+
+            email: (value) =>
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+                    value
+                )
+                    ? null
+                    : "Invalid email",
+        }
+    });
+
     //declare edit form
     const editForm = useForm({
         validateInputOnChange: true,
@@ -178,6 +219,55 @@ const ManageMembers = () => {
             _id: "",
         },
     });
+
+    //register memeber function
+    const registerUser = async (values: {
+        name: string;
+        email: string;
+        year: string;
+        country: string;
+        mobile: string;
+        company: string;
+        jobRole: string;
+    }) => {
+        showNotification({
+            id: "Add User",
+            loading: true,
+            title: "Adding User",
+            message: "Please wait while we add user record..",
+            autoClose: false,
+
+        });
+
+        UserAPI.userRegister(values)
+            .then((Response) => {
+                updateNotification({
+                    id: "Add User",
+                    color: "teal",
+                    title: "Adding User record",
+                    message: "Please wait while we add User record..",
+                    icon: <IconCheck />,
+                    autoClose: 2500,
+                });
+
+                registerForm.reset();
+                setRegOpened(false);
+
+                refetch();
+
+
+            })
+            .catch((error) => {
+                updateNotification({
+                    id: "Add User",
+                    color: "red",
+                    title: "Something went wrong!",
+                    message: "There is a problem when adding user",
+                    icon: <IconX />,
+                    autoClose: 2500,
+                });
+            });
+    };
 
     //update member details  function
     const updateDetails = async (values: {
@@ -580,6 +670,81 @@ const ManageMembers = () => {
                     </Button>
                 </form>
             </Modal>
+
+            {/* register model */}
+            <Modal
+                opened={regOpened}
+                onClose={() => {
+                    registerForm.reset();
+                    setRegOpened(false);
+                }}
+                title="Add member Record"
+            >
+                <form
+
+                    onSubmit={registerForm.onSubmit((values) => registerUser(values))}
+                >
+                    <TextInput
+                        label="Member Name"
+                        placeholder="Enter member name"
+                        {...registerForm.getInputProps("name")}
+                        required
+                    />
+                    <TextInput
+                        label="Email"
+                        placeholder="Enter email"
+                        {...registerForm.getInputProps("email")}
+                        required
+                    />
+                    <YearPickerInput
+                        label="Batch Year"
+                        placeholder="Pick date"
+                        withAsterisk
+                        {...registerForm.getInputProps("year")}
+                    />
+                    <Select data={selectCountryList} searchable
+                        label="Country Of Residence"
+                        placeholder='Sri Lanka'
+                        {...registerForm.getInputProps("country")}
+
+                    />
+                    <TextInput
+                        label="Phone number"
+                        placeholder="Enter Phone number"
+                        {...registerForm.getInputProps("mobile")}
+                        required
+                    />
+                    <TextInput
+                        label="Company Name"
+                        placeholder="Enter Company Name"
+                        {...registerForm.getInputProps("company")}
+                        required
+                    />
+
+                    <Select
+                        label="Job Role"
+                        placeholder="Pick one"
+                        value={selectedRole}
+                        data={jobRoleOptions}
+                        onChange={(value) => handleSelectChange(value)}
+
+                    />
+                    {selectedRole === 'other' && (
+                        <input
+                            type="text"
+
+                            onChange={handleCustomRoleChange}
+                            placeholder="Enter your job role"
+                            style={{ marginTop: '10px', width: '426px', height: '30px', borderRadius: '5px', border: '1px solid #ccc', padding: '5px' }}
+                        />
+                    )}
+
+
+                    <Button fullWidth mt="xl" type="submit">
+                        Submit
+                    </Button>
+                </form>
+            </Modal>
             <div>
                 <Group spacing={35} mb={70} mt={30}>
                     {/* search bar */}
@@ -591,6 +756,15 @@ const ManageMembers = () => {
                         ml={"12%"}
                         w={"60%"}
                     />
+                    <Button
+                        onClick={() => setRegOpened(true)}
+                        color="blue"
+                        sx={{ marginTop: "10px", width: "10%" }}
+                        type="submit"
+                        
+                    >
+                        Add Member
+                    </Button>
                 </Group>
                 <ScrollArea
                     w={"100mw"}
