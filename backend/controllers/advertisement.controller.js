@@ -25,3 +25,15 @@ export const getFrontLeftAds = async (req, res) => {
     res.status(500).json({ msg: "error while fetching ads data" });
   }
 };
+
+
+export const getSiverAds = async (req, res) => {
+
+  try {
+    const ads = await Advertisement.find({ place: "FRONTBOTTOM" });
+
+    res.status(200).json(ads);
+  } catch (error) {
+    res.status(500).json({ msg: "error while fetching ads data" });
+  }
+};

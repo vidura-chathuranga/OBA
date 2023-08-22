@@ -5,6 +5,7 @@ import Vision from "../components/Vision";
 import Mission from "../components/Mission";
 import Footer from "../components/footer/footer";
 import ShowInLandingPage from "../components/frontLeftAd/showInLanding";
+import ShowSilverAdInLandingPage from "../components/silverAd/ShowSilverAdInLandingPage"
 const LandingPage = () => {
   return (
     <>
@@ -17,8 +18,9 @@ const LandingPage = () => {
           <LandingCarousel />
         </Grid.Col>
         <Grid.Col span={2}>
-          <Skeleton height={"75vh"} />
+          <ShowSilverAdInLandingPage />
         </Grid.Col>
+
       </Grid>
       <Vision />
       <Mission />
