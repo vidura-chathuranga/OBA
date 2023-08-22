@@ -89,6 +89,8 @@ interface Data {
     _id:string;
     shopname: string;
     discount: string;
+    count : string;
+    details : string;
 
 
 }
@@ -137,6 +139,8 @@ const PromationCode = () => {
 
             shopname: "",
             discount: "",
+            count : "",
+            details : "",
         },
     });
 
@@ -148,6 +152,8 @@ const PromationCode = () => {
             _id : "",
             shopname: "",
             discount: "",
+            count : "",
+            details : "",
 
 
         },
@@ -158,8 +164,6 @@ const PromationCode = () => {
         validateInputOnChange: true,
         initialValues: {
             _id :"",
-            
-            
         },
     });
 
@@ -169,6 +173,8 @@ const PromationCode = () => {
 
         shopname: string;
         discount: string;
+        count : string;
+        details : string;
 
     }) => {
         showNotification({
@@ -214,6 +220,8 @@ const PromationCode = () => {
         _id : string;
         shopname: string;
         discount: string;
+        count : string;
+        details : string;
 
     }) => {
         showNotification({
@@ -303,6 +311,12 @@ const PromationCode = () => {
                 <td>
                     <Text size={15}>{row.discount}</Text>
                 </td>
+                <td>
+                    <Text size={15}>{row.count}</Text>
+                </td>
+                <td>
+                    <Text size={15}>{row.details}</Text>
+                </td>
 
                 <td>
                     {
@@ -356,6 +370,12 @@ const PromationCode = () => {
                 <td>
                     <Text size={15}>{row.discount}</Text>
                 </td>
+                <td>
+                    <Text size={15}>{row.count}</Text>
+                </td>
+                <td>
+                    <Text size={15}>{row.details}</Text>
+                </td>
 
                 <td>
                     {
@@ -373,6 +393,8 @@ const PromationCode = () => {
                                                 _id:row._id,
                                                 shopname: row.shopname,
                                                 discount: row.discount,
+                                                count : row.count,
+                                                details : row.details,
 
                                             });
                                             setEditOpened(true);
@@ -502,6 +524,18 @@ const PromationCode = () => {
                         {...editForm.getInputProps("discount")}
                         required
                     />
+                    <TextInput
+                        label="Code Count"
+                        placeholder="Enter Code Count"
+                        {...editForm.getInputProps("count")}
+                        required
+                    />
+                     <TextInput
+                        label="Code Details"
+                        placeholder="Enter Code Details"
+                        {...editForm.getInputProps("details")}
+                        required
+                    />
 
 
                     <Button
@@ -535,6 +569,18 @@ const PromationCode = () => {
                         label="Discount"
                         placeholder="Discount"
                         {...addForm.getInputProps("discount")}
+                        required
+                    />
+                    <TextInput
+                        label="Code Count"
+                        placeholder="Enter Code Count"
+                        {...addForm.getInputProps("count")}
+                        required
+                    />
+                     <TextInput
+                        label="Code Details"
+                        placeholder="Enter Code Details"
+                        {...addForm.getInputProps("details")}
                         required
                     />
 
@@ -586,6 +632,8 @@ const PromationCode = () => {
                             <tr>
                                 <th>Shop Name</th>
                                 <th>Discount</th>
+                                <th>Count</th>
+                                <th>Details</th>
                                 <th>Action</th>
 
                             </tr>

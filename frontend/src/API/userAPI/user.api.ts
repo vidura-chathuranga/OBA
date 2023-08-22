@@ -42,7 +42,7 @@ class UserAPI{
 
       
     //Add promoation code 
-    static addPromotionCode(values :{shopname: string,discount: string}){
+    static addPromotionCode(values :{shopname: string,discount: string , count: string , details :string}){
         console.log(values);
         return axios.post(`${BASE_URL}/code/addpromo`,values);
     }
@@ -67,12 +67,13 @@ class UserAPI{
         _id : string;
         shopname: string;
         discount : string;
+        count : string;
+        details : string;
        
     }) =>{
         console.log(values);
         return axios.put(`${BASE_URL}/code/update/${values._id}`,values);
     }
-
 
 };
 
