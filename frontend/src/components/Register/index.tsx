@@ -33,7 +33,8 @@ import { useState } from "react";
 import { YearPickerInput } from '@mantine/dates';
 import { selectCountryList } from "../../components/Register/coutries";
 import UserAPI from '../../API/userAPI/user.api';
-import { PromoCodeCard } from '../PromoCodeCard/card';
+import { PromoCard } from '../PromoCodeCard/card';
+
 
 
 
@@ -260,17 +261,12 @@ export const Register = () => {
 
                                     />
                                    
-                                   
-                                    
-
                                     <TextInput
 
                                         label="Current Employe Company"
                                         required
                                         placeholder='Sensus Hub'
                                         {...registerForm.getInputProps("company")}
-
-
                                     />
 
                                     <div>
@@ -312,6 +308,8 @@ export const Register = () => {
                                 </Paper>
                             </form>
                         </div>
+
+                        {/* <PromoCard/> */}
 
 
                     </Container>
