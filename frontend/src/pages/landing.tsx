@@ -1,4 +1,4 @@
-import { Grid, Group, Select, SimpleGrid, Skeleton } from "@mantine/core";
+import { Grid, Group, Select, SimpleGrid, Skeleton, Title } from "@mantine/core";
 import LandingCarousel from "../components/Carousel";
 import DefaultHeader from "../components/defaultHeader";
 import Vision from "../components/Vision";
@@ -6,6 +6,9 @@ import Mission from "../components/Mission";
 import Footer from "../components/footer/footer";
 import ShowInLandingPage from "../components/frontLeftAd/showInLanding";
 import ShowSilverAdInLandingPage from "../components/silverAd/ShowSilverAdInLandingPage"
+import AddNews from "../components/addNews";
+import ShowNewsLandingPage from "../components/addNews/showNewsLandingPage";
+
 const LandingPage = () => {
   return (
     <>
@@ -22,8 +25,23 @@ const LandingPage = () => {
         </Grid.Col>
 
       </Grid>
+
+      <SimpleGrid cols={2} spacing="xs">
       <Vision />
       <Mission />
+      </SimpleGrid>
+
+      <Title style={{marginLeft:25, fontFamily:"Copperplate",fontSize: "25px" }} >Latest News & Events</Title>
+
+
+      <SimpleGrid cols={2} spacing="xs" style={{ marginLeft:25 ,marginRight: 25 , marginBottom :20 }}>
+        
+        
+      <ShowNewsLandingPage/>
+      <ShowNewsLandingPage/>
+      </SimpleGrid>
+
+
       <Footer />
     </>
   );

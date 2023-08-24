@@ -18,7 +18,7 @@ import {
   IconSwitchHorizontal,
   IconLogout,
 } from "@tabler/icons-react";
-import { DiscountCheck } from 'tabler-icons-react';
+import { DiscountCheck, News } from 'tabler-icons-react';
 import { MantineLogo } from "@mantine/ds";
 import { Navigate } from "react-router-dom";
 
@@ -108,6 +108,11 @@ const data = [
     link: "/admin/PromotionCodeManage",
     label: "Add Promation Code",
     icon: DiscountCheck,
+  },
+  {
+    link: "/admin/AddNews",
+    label: "Add News",
+    icon: News,
   },
 ];
 

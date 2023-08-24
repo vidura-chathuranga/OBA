@@ -97,14 +97,14 @@ const DefaultHeader = () => {
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <a href="#" className={classes.link}>
+            {/* <a href="#" className={classes.link}>
               About Us
             </a>
             <a href="#" className={classes.link}>
               Contact Us
-            </a>
+            </a> */}
             <a href="/AddDetails" className={classes.link}>
-              Members
+              Become a member
             </a>
           </Group>
 
@@ -115,8 +115,8 @@ const DefaultHeader = () => {
               style={buttonStyle}>
               Admin Pannel
             </Button>
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            {/* <Button variant="default">Log in</Button>
+            <Button>Sign up</Button> */}
           </Group>
 
           <Burger
