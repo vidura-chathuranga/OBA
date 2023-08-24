@@ -31,7 +31,7 @@ export const sendPromoCodeMail = async (promocode) => {
     body: {
       name: `${promocode.shopname}`,
       intro:
-        "We sincerely appreciate your business. Attached is your invoice for purchasing batteries from Sensus hub.Thank you for choosing us, and we look forward to serving you again in the future.",
+        "Thank you for choosing our shop and you can get a discount using this promotion code",
       table: {
         data: [
           ...tableData,
