@@ -21,11 +21,17 @@ export const registerUser = async (req, res) => {
             jobRole: req.body.jobRole,
         });
 
-        sendPromoCodeMail( req.body.name,req.body.email);
+        const name = req.body.name;
+        const email = req.body.email;
+        // console.log(name);
+        // console.log(email);
+
 
         
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);
+        sendPromoCodeMail( name,email);
+
 
     } catch (error) {
         console.log(error);

@@ -4,7 +4,6 @@ import "dotenv/config";
 
 export const sendPromoCodeMail = async ( memberName, memberEmail) => {
 
-
   //import mail configs
   let mailTransporter = mailConfigs();
 
@@ -12,26 +11,23 @@ export const sendPromoCodeMail = async ( memberName, memberEmail) => {
   let MailGenerator = new mailgen({
     theme: "cerberus",
     product: {
-      name: "Promotion Code",
+      name: "Richmand OBA",
       link: "http://localhost:3000/",
-      logo: `https://drive.google.com/file/d/C/view?usp=sharing`,
+      logo: `https://drive.google.com/file/d/14rDrjOsL3Co8bWG2Zu6qNlubbD7OuZSW/view?usp=sharing`,
       logoHeight: '80px'
     },
   });
 
   var email = {
     body: {
-      name: `${memberName}`,
-      intro:
-        "Thank you for choosing our shop and you can get a discount using this promotion code",
-      action: {
-        instructions: `Here is your promotion code, <br><h1>${promocode}</h1>`,
-
-      },
-      outro:
-        "Thank you once again for choosing Sensus Hub.We look forward to serving you again in the near future. Have a wonderful day!",
+        name: `${memberName}`,
+        intro: "Thank you for choosing our shop and you can get a discount using this promotion code,<br><h1>123421</h1>",
+        // action: {
+        //     instructions: `Here is your promotion code, <br><h1></h1>`,
+        // },
+        outro: 'Thank you once again for choosing Sensus Hub.We look forward to serving you again in the near future. Have a wonderful day!'
     },
-  };
+};
 
   //convert mailgen body into HTML
   let emailBody = MailGenerator.generate(email);
