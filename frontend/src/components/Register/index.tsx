@@ -300,7 +300,7 @@ export const Register = () => {
                                             />
                                         )}
                                     </div>
-                                    <Button fullWidth mt="xl" type="button" onClick={openModal}>
+                                    <Button fullWidth mt="xl" type="submit" onClick={openModal}>
                                         Next
                                     </Button>
                                     
