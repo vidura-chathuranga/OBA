@@ -6,7 +6,7 @@ const Mission = () => {
     <Card withBorder mr={30} ml={30} mt={20} shadow="lg" mb={20}>
       <Card.Section p={10} withBorder>
         <Group position="center">
-          <IconTarget size={50} /> <Title>Mission</Title>
+          <IconTarget size={35} /> <Title>Mission</Title>
         </Group>
       </Card.Section>
       <Text p={50} align="justify" ff={"sans-serif"} size={"lg"}>

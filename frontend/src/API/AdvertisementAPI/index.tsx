@@ -17,9 +17,11 @@ class AdAPI {
     }
 
     static getSilverAd = () => {
-        console.log("API add")
+        
         return newAxios.get('/advertisement/silverAd');
     }
+
+ 
 }
 
 export default AdAPI;

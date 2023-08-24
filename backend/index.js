@@ -7,6 +7,7 @@ import CodeRoutes from './routes/code.routes.js';
 import AdminRoutes from './routes/admin.routes.js';
 import cookieParser from "cookie-parser";
 import AdRoutes from "./routes/advertisement.routes.js";
+import NewsRoutes from "./routes/news.routes.js"
 
 const app = express();
 
@@ -37,6 +38,8 @@ app.use('/user',UserRoutes);
 app.use('/admin',AdminRoutes);
 app.use('/code',CodeRoutes);
 app.use('/advertisement',AdRoutes);
+app.use('/news',NewsRoutes);
+
 
 app.listen(PORT,()=>{
     console.log(`🚀 Server is started on port ${PORT}`);

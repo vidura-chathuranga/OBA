@@ -1,18 +1,18 @@
 import { Grid } from "@mantine/core";
 import NavbarSimple from "../../components/AdminDashboard";
-import ManageAdvertisement from "../../components/manageAdvertisement";
+import AddNews from "../../components/addNews";
 
 
-const ManageAdvertisementPage = () =>{
+const AddNewsAdmin = () =>{
     return(
         <div>
         <Grid>
           <Grid.Col span={"content"}>
-            <NavbarSimple link_id={1}/>
+            <NavbarSimple link_id={3}/>
           </Grid.Col>
   
           <Grid.Col span={"auto"}>
-              <ManageAdvertisement/>
+              <AddNews/>
           </Grid.Col>
   
   
@@ -24,4 +24,4 @@ const ManageAdvertisementPage = () =>{
     )
 }
 
-export default ManageAdvertisementPage;
+export default AddNewsAdmin;
