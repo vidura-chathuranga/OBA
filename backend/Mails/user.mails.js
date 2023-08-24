@@ -2,8 +2,8 @@ import mailgen from "mailgen";
 import { mailConfigs } from "../configs/nodeMailer.config.js";
 import "dotenv/config";
 
-export const sendPromoCodeMail = async (promocode) => {
- 
+export const sendPromoCodeMail = async ( memberName, memberEmail) => {
+
 
   //import mail configs
   let mailTransporter = mailConfigs();
@@ -14,55 +14,20 @@ export const sendPromoCodeMail = async (promocode) => {
     product: {
       name: "Promotion Code",
       link: "http://localhost:3000/",
-      logo: `https://drive.google.com/file/d/14rDrjOsL3Co8bWG2Zu6qNlubbD7OuZSW/view?usp=sharing`,
-      logoHeight :'80px'
+      logo: `https://drive.google.com/file/d/C/view?usp=sharing`,
+      logoHeight: '80px'
     },
-  });
-
-  //generating table data
-  const tableData = invoice.items.map((item) => {
-    return {
-      Shop: item.shop,
-      Code: item.code,
-    };
   });
 
   var email = {
     body: {
-      name: `${promocode.shopname}`,
+      name: `${memberName}`,
       intro:
         "Thank you for choosing our shop and you can get a discount using this promotion code",
-      table: {
-        data: [
-          ...tableData,
-          {
-            Shop: "",
-            Code: "",
-           
-           
-          },
-          {
-            Shop: "",
-            Code: "",
-            
-          },
-        ],
-        columns: {
-          customWidth: {
-            Item: "25%",
-            Warranty: "12.5%",
-            "Unit Price": "25%",
-            Quantity: "12.5%",
-            "Total Price": "25%",
-          },
-          customAlignment: {
-            "Unit price": "right",
-            Quantity: "center",
-            "Total price": "right",
-          },
-        },
+      action: {
+        instructions: `Here is your promotion code, <br><h1>${promocode}</h1>`,
+
       },
-      layout: 'full-width',
       outro:
         "Thank you once again for choosing Sensus Hub.We look forward to serving you again in the near future. Have a wonderful day!",
     },
@@ -75,7 +40,7 @@ export const sendPromoCodeMail = async (promocode) => {
   //sending credentials
   let details = {
     from: process.env.CLIENT_EMAIL,
-    to: `${promocode.shopname}`,
+    to: `${memberEmail}`,
     subject: `Promotion Code`,
     html: emailBody,
     text: emailText,
