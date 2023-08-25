@@ -1,4 +1,4 @@
-import { Grid } from "@mantine/core";
+import { Grid,SimpleGrid } from "@mantine/core";
 import NavbarSimple from "../../components/AdminDashboard";
 import AddNews from "../../components/addNews";
 import AddNewsRight from "../../components/addNews/addNewsRight";
@@ -16,6 +16,10 @@ const AddNewsAdmin = () =>{
               <AddNews/>
               <AddNewsRight/>
           </Grid.Col>
+
+          <SimpleGrid cols = {2}>
+            
+          </SimpleGrid>
   
   
           
