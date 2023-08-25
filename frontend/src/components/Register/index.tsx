@@ -43,23 +43,27 @@ export const Register = () => {
     const [opened, setOpened] = useState(false);
     const [value, setValue] = useState<Date | null>(null);
     const [selectedRole, setSelectedRole] = useState('');
-    const [isSwitchOn , setSwitchOn] = useState(false);
+    const [isSwitchOn, setSwitchOn] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
+    const [userName, setUserName] = useState("");
+    const [userEmail, setUserEmail] = useState("");
 
-    const openModal = () => {
+    const openModal = (name: string, email: string) => {
+        setUserName(name);
+        setUserEmail(email);
         setModalOpen(true);
     };
 
     const closeModal = () => {
         setModalOpen(false);
     };
-    
 
 
-    const toggleSwitch = () =>{
+
+    const toggleSwitch = () => {
         setSwitchOn(!isSwitchOn);
     };
-   
+
 
     const handleSelectChange = (value: any) => {
         setSelectedRole(value);
@@ -99,13 +103,13 @@ export const Register = () => {
             jobRole: "",
 
         },
-        validate:{
-            name:(value) =>
-                value.length < 2 ? "Name must have at least 2 letters": null,
-            
+        validate: {
+            name: (value) =>
+                value.length < 2 ? "Name must have at least 2 letters" : null,
+
             email: (value) =>
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-                value
+                    value
                 )
                     ? null
                     : "Invalid email",
@@ -118,7 +122,7 @@ export const Register = () => {
         year: string;
         country: string;
         mobile: string;
-        company : string;
+        company: string;
         jobRole: string;
     }) => {
         showNotification({
@@ -144,7 +148,6 @@ export const Register = () => {
                 registerForm.reset();
                 setOpened(false);
 
-
             })
             .catch((error) => {
                 updateNotification({
@@ -163,12 +166,12 @@ export const Register = () => {
         "title": "Plan & save",
         "description": "Save up to 25% at Fifth Season Hotels in Europe, the Middle East, Africa and Asia Pacific",
         "action": {
-          "label": "Book now",
-          "link": "#"
+            "label": "Book now",
+            "link": "#"
         }
-      }
-        
-    
+    }
+
+
 
     return (
         <>
@@ -231,89 +234,91 @@ export const Register = () => {
 
                                     />
 
-                                    <h5>By providing us with the following details, 
-                                        you'll unlock a special 
+                                    <h5>By providing us with the following details,
+                                        you'll unlock a special
                                         <span style={{ color: 'red' }}> promotion code</span> exclusive to you.</h5>
                                     <Switch
                                         label="I agree to add my details"
                                         color="violet"
-                                        
+
                                         radius="sm"
-                                        checked = {isSwitchOn}
+                                        checked={isSwitchOn}
                                         onChange={toggleSwitch}
                                     />
 
-                                    <br/>
+                                    <br />
 
 
 
-                                {isSwitchOn ?  (
-                                    <>
-                                    <Select data={selectCountryList} searchable
-                                        label="Country Of Residence"
-                                        required
-                                        placeholder='Sri Lanka'
-                                        {...registerForm.getInputProps("country")}
-
-                                    />
-
-                                   
-
-                                    
-
-                                    <TextInput
-
-                                        label="Mobile No"
-                                        placeholder='+9471136106'
-                                        required
-                                        {...registerForm.getInputProps("mobile")}
-
-
-                                    />
-                                   
-                                    <TextInput
-
-                                        label="Current Employe Company"
-                                        required
-                                        placeholder='Sensus Hub'
-                                        {...registerForm.getInputProps("company")}
-                                    />
-
-                                    <div>
-
-                                        <Select
-                                            label="Job Role"
-                                            placeholder="Pick one"
-                                            required
-                                            value={selectedRole}
-                                            data={jobRoleOptions}
-                                            onChange={(value) => handleSelectChange(value)}
-
-                                        />
-                                        {selectedRole === 'other' && (
-                                            <input
-                                                type="text"
-                                                onChange={handleCustomRoleChange}
+                                    {isSwitchOn ? (
+                                        <>
+                                            <Select data={selectCountryList} searchable
+                                                label="Country Of Residence"
                                                 required
-                                                placeholder="Enter your job role"
-                                                style={{ marginTop: '10px', width: '407px', height: '40px', borderRadius: '5px', border: ' solid #ccc', padding: '5px' }}
+                                                placeholder='Sri Lanka'
+                                                {...registerForm.getInputProps("country")}
+
                                             />
-                                        )}
-                                    </div>
-                                    <Button fullWidth mt="xl" type="submit" onClick={openModal}>
-                                        Next
-                                    </Button>
-                                    
-                                    </>
 
-                                ):(
-                                    <Button fullWidth mt="xl" type="submit">
-                                    Submit
-                                    </Button>
 
-                                )}
 
-                                   
+
+
+                                            <TextInput
+
+                                                label="Mobile No"
+                                                placeholder='+9471136106'
+                                                required
+                                                {...registerForm.getInputProps("mobile")}
+
+
+                                            />
+
+                                            <TextInput
+
+                                                label="Current Employe Company"
+                                                required
+                                                placeholder='Sensus Hub'
+                                                {...registerForm.getInputProps("company")}
+                                            />
+
+                                            <div>
+
+                                                <Select
+                                                    label="Job Role"
+                                                    placeholder="Pick one"
+                                                    required
+                                                    value={selectedRole}
+                                                    data={jobRoleOptions}
+                                                    onChange={(value) => handleSelectChange(value)}
+
+                                                />
+                                                {selectedRole === 'other' && (
+                                                    <input
+                                                        type="text"
+                                                        onChange={handleCustomRoleChange}
+                                                        required
+                                                        placeholder="Enter your job role"
+                                                        style={{ marginTop: '10px', width: '407px', height: '40px', borderRadius: '5px', border: ' solid #ccc', padding: '5px' }}
+                                                    />
+                                                )}
+                                            </div>
+                                            <Button fullWidth mt="xl" type="submit" onClick={() => openModal(registerForm.values.name, registerForm.values.email)}>
+                                                Next
+                                            </Button>
+
+
+
+                                        </>
+
+                                    ) : (
+                                        <Button fullWidth mt="xl" type="submit">
+                                            Submit
+                                        </Button>
+
+                                    )}
+
+
 
                                 </Paper>
                             </form>
@@ -321,14 +326,14 @@ export const Register = () => {
 
                         {/* <PromoCard/> */}
                         {/* Modal */}
-                     
+
 
 
                     </Container>
                 </div>
-            </div> 
+            </div>
             <Modal opened={isModalOpen} onClose={closeModal} size={1100}>
-                <ViewPromotionDetails />
+                <ViewPromotionDetails name={userName} email={userEmail} />
             </Modal>
 
         </>

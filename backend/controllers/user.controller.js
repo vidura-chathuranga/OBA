@@ -21,16 +21,8 @@ export const registerUser = async (req, res) => {
             jobRole: req.body.jobRole,
         });
 
-        const name = req.body.name;
-        const email = req.body.email;
-        // console.log(name);
-        // console.log(email);
-
-
-        
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);
-        sendPromoCodeMail( name,email);
 
 
     } catch (error) {
@@ -95,4 +87,19 @@ export const deleteMember = async (req, res) => {
         res.status(500).json({ message: "Failed to delete member",err });
     }
 
-}
+};
+
+export const sendPromoCode = async (req, res) => {
+
+    const userName = req.body.name;
+    const userEmail = req.body.email;
+    try{
+
+        sendPromoCodeMail( userName,userEmail);
+
+    }catch(err){
+
+        return err.message;
+
+    }
+};
