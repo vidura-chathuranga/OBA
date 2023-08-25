@@ -89,11 +89,11 @@ const useStyles = createStyles((theme) => ({
 
 interface Data {
 
-    _id:string;
+    _id: string;
     shopname: string;
     discount: string;
-    count : string;
-    details : string;
+    count: string;
+    details: string;
 
 
 }
@@ -108,14 +108,15 @@ function filterData(data: Data[], search: string) {
     );
 }
 
-const ViewPromotionDetails = () => {
+const ViewPromotionDetails = (values: {
+    name : string;
+    email: string;
+}) => {
     const [search, setSearch] = useState("");
     const { classes, cx } = useStyles();
     const [scrolled, setScrolled] = useState(false);
-    const [deleteOpen, setDeleteOpen] = useState(false);
-    const [editOpened, setEditOpened] = useState(false);
-    const [opened, setOpened] = useState(false);
     const [sortedData, setSortedData] = useState<Data[]>([]);
+
 
     // use react query and fetch data
     const { data = [], isLoading, isError, refetch, } = useQuery(["memberData"], () => {
@@ -142,11 +143,37 @@ const ViewPromotionDetails = () => {
 
             shopname: "",
             discount: "",
-            count : "",
-            details : "",
+            count: "",
+            details: "",
         },
     });
 
+    const passNameEmail = () => {
+
+
+        UserAPI.passNameEmail(values)
+            .then((res)=>{
+                updateNotification({
+                    id: "Send promoCode",
+                    color: "teal",
+                    title: "Sending Promotion code",
+                    message: "Please wait while we Sending Promotion code..",
+                    icon: <IconCheck />,
+                    autoClose: 2500,
+                });
+            })
+
+            .catch((error) => {
+                updateNotification({
+                    id: "Send promoCode",
+                    color: "red",
+                    title: "Something went wrong!",
+                    message: "There is a problem when Sending Promotion code",
+                    icon: <IconX />,
+                    autoClose: 2500,
+                });
+            });
+    }
 
 
     //declare the rows variable and based on the filtered data or row data, it will print the table data!
@@ -162,7 +189,7 @@ const ViewPromotionDetails = () => {
                 <td>
                     <Text size={15}>{row.discount}</Text>
                 </td>
-               
+
                 <td>
                     <Text size={15}>{row.details}</Text>
                 </td>
@@ -187,7 +214,7 @@ const ViewPromotionDetails = () => {
                 <td>
                     <Text size={15}>{row.discount}</Text>
                 </td>
-               
+
                 <td>
                     <Text size={15}>{row.details}</Text>
                 </td>
@@ -195,11 +222,11 @@ const ViewPromotionDetails = () => {
                     {
                         <>
                             <Group spacing={"xs"}>
-                            <Button variant="subtle">
-                                Get Promo Code
-                            </Button>
+                                <Button onClick={passNameEmail} variant="subtle">
+                                    Get Promo Code
+                                </Button>
 
-                               
+
                             </Group>
                         </>
                     }
@@ -230,10 +257,10 @@ const ViewPromotionDetails = () => {
             sx={{ display: "flex", justifyContent: "space-between" }}
             pos="relative"
         >
-           
-                
 
-           
+
+
+
             <div>
                 <Group spacing={35} mb={70} mt={30}>
                     {/* search bar */}
@@ -245,7 +272,7 @@ const ViewPromotionDetails = () => {
                         ml={"12%"}
                         w={"60%"}
                     />
-                   
+
                 </Group>
 
                 <ScrollArea
