@@ -92,7 +92,7 @@ const FrontLeftAdvertisement = () => {
       <Card withBorder shadow="xl" mt={30}>
         <Card.Section withBorder p={10}>
           <Title order={2} align="center">
-            Gold Advertisement
+            Front-Left Advertisement
           </Title>
         </Card.Section>
         <Card.Section p={20}>
