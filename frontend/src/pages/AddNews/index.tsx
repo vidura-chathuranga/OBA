@@ -1,6 +1,7 @@
 import { Grid } from "@mantine/core";
 import NavbarSimple from "../../components/AdminDashboard";
 import AddNews from "../../components/addNews";
+import AddNewsRight from "../../components/addNews/addNewsRight";
 
 
 const AddNewsAdmin = () =>{
@@ -13,6 +14,7 @@ const AddNewsAdmin = () =>{
   
           <Grid.Col span={"auto"}>
               <AddNews/>
+              <AddNewsRight/>
           </Grid.Col>
   
   
