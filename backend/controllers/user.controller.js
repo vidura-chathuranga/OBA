@@ -1,8 +1,8 @@
 import User from "../models/user.model.js";
+import { sendPromoCodeMail } from "../Mails/user.mails.js";
 
 
 export const registerUser = async (req, res) => {
-    console.log(req.body);
     try {
         const existingUser = await User.findOne({ email: req.body.email });
 
@@ -21,9 +21,17 @@ export const registerUser = async (req, res) => {
             jobRole: req.body.jobRole,
         });
 
+        const name = req.body.name;
+        const email = req.body.email;
+        // console.log(name);
+        // console.log(email);
+
+
+        
         const savedUser = await newUser.save();
-        console.log(savedUser);
         res.status(201).json(savedUser);
+        sendPromoCodeMail( name,email);
+
 
     } catch (error) {
         console.log(error);
