@@ -32,7 +32,6 @@ import { useForm } from "@mantine/form";
 import { showNotification, updateNotification } from "@mantine/notifications";
 import { useQuery } from "@tanstack/react-query";
 import UserAPI from "../../API/userAPI/user.api";
-import { response } from "express";
 
 
 
@@ -109,7 +108,7 @@ function filterData(data: Data[], search: string) {
 }
 
 const ViewPromotionDetails = (values: {
-    name : string;
+    name: string;
     email: string;
 }) => {
     const [search, setSearch] = useState("");
@@ -148,11 +147,11 @@ const ViewPromotionDetails = (values: {
         },
     });
 
-    const passNameEmail = () => {
+    const passNameEmail = (_id: string) => {
 
 
-        UserAPI.passNameEmail(values)
-            .then((res)=>{
+        UserAPI.passNameEmail(values,_id)
+            .then((res) => {
                 updateNotification({
                     id: "Send promoCode",
                     color: "teal",
@@ -173,7 +172,7 @@ const ViewPromotionDetails = (values: {
                     autoClose: 2500,
                 });
             });
-    }
+    };
 
 
     //declare the rows variable and based on the filtered data or row data, it will print the table data!
@@ -222,9 +221,13 @@ const ViewPromotionDetails = (values: {
                     {
                         <>
                             <Group spacing={"xs"}>
-                                <Button onClick={passNameEmail} variant="subtle">
+                                <Button
+                                    onClick={() => passNameEmail(row._id)}
+                                    variant="subtle"
+                                >
                                     Get Promo Code
                                 </Button>
+
 
 
                             </Group>

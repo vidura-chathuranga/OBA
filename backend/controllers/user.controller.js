@@ -1,4 +1,6 @@
 import User from "../models/user.model.js";
+import PromoCode from "../models/promotion.model.js";
+
 import { sendPromoCodeMail } from "../Mails/user.mails.js";
 
 
@@ -17,7 +19,7 @@ export const registerUser = async (req, res) => {
             year: req.body.year,
             country: req.body.country,
             mobile: req.body.mobile,
-            company:req.body.company,
+            company: req.body.company,
             jobRole: req.body.jobRole,
         });
 
@@ -56,14 +58,12 @@ export const updateMembers = async (req, res) => {
         year: req.body.year,
         country: req.body.country,
         mobile: req.body.mobile,
-        company : req.body.company,
+        company: req.body.company,
         jobRole: req.body.jobRole,
 
     };
     try {
-        const updateMember = await User.findByIdAndUpdate(id, updateFields,{ new: true });
-
-        console.log(updateMember)
+        const updateMember = await User.findByIdAndUpdate(id, updateFields, { new: true });
 
         res.status(200).json(updateMember); // Send the updated member as the response
 
@@ -81,23 +81,37 @@ export const deleteMember = async (req, res) => {
     try {
         const deleteMember = await User.findByIdAndDelete(_id);
 
-        res.status(200).json({ message: "Member deleted",deleteMember})
+        res.status(200).json({ message: "Member deleted", deleteMember })
 
     } catch (err) {
-        res.status(500).json({ message: "Failed to delete member",err });
+        res.status(500).json({ message: "Failed to delete member", err });
     }
 
 };
 
 export const sendPromoCode = async (req, res) => {
 
+    const id = req.params.id; //get the object id of the promotion code
     const userName = req.body.name;
     const userEmail = req.body.email;
-    try{
+    try {
 
-        sendPromoCodeMail( userName,userEmail);
+        // Fetch promotion code details from the database
+        const promotionCode = await PromoCode.findById(id);
 
-    }catch(err){
+        if (!promotionCode) {
+            return res.status(404).json({ message: "Promotion code not found" });
+        }
+
+        // Decrement the count by 1
+        promotionCode.count = Math.max(0, promotionCode.count - 1);
+
+        // Save the updated promotion code count details
+        await promotionCode.save();
+
+        sendPromoCodeMail(userName, userEmail);
+
+    } catch (err) {
 
         return err.message;
 

@@ -7,7 +7,7 @@ router.post(`/register`, registerUser);
 router.get("/", getAllMembers);
 router.delete("/delete/:id", deleteMember);
 router.put("/update/:id", updateMembers);
-router.post("/details",sendPromoCode)
+router.post("/details/:id",sendPromoCode)
 
 
 export default router;
