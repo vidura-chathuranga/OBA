@@ -75,10 +75,10 @@ class UserAPI {
     }
 
     static passNameEmail = (values: {
-        name: string
-        email: string
-    }) => {
-        return axios.post(`${BASE_URL}/user/details`,values)
+        name: string;
+        email: string;
+    },_id : string) => {
+        return axios.post(`${BASE_URL}/user/details/${_id}`,values)
     }
 
 };
