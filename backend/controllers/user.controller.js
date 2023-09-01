@@ -89,9 +89,11 @@ export const deleteMember = async (req, res) => {
 
 };
 
+
+//send and decrese promotion code count function 
 export const sendPromoCode = async (req, res) => {
 
-    const id = req.params.id; //get the object id of the promotion code
+    const id = req.params.id; 
     const userName = req.body.name;
     const userEmail = req.body.email;
     try {
@@ -113,7 +115,7 @@ export const sendPromoCode = async (req, res) => {
 
     } catch (err) {
 
-        return err.message;
+        res.status(500).json({ message: "Failed Send Email", err });
 
     }
 };
