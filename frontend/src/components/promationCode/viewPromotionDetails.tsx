@@ -222,8 +222,10 @@ const ViewPromotionDetails = (values: {
                         <>
                             <Group spacing={"xs"}>
                                 <Button
+                                    component={'a'}
                                     onClick={() => passNameEmail(row._id)}
                                     variant="subtle"
+                                    target="_blank"
                                 >
                                     Get Promo Code
                                 </Button>

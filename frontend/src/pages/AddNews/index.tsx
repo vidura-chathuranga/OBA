@@ -20,9 +20,6 @@ const AddNewsAdmin = () =>{
           <SimpleGrid cols = {2}>
             
           </SimpleGrid>
-  
-  
-          
         </Grid>
   
         
