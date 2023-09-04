@@ -31,10 +31,10 @@ const LandingPage = () => {
       <Mission />
       </SimpleGrid>
 
-      <Title style={{marginLeft:25, fontFamily:"Copperplate",fontSize: "25px" }} >Latest News & Events</Title>
+      <Title style={{marginLeft:25, fontFamily:"Arial",fontSize: "25px" , marginBottom:20 }} >Latest News & Events</Title>
 
 
-      <SimpleGrid cols={2} spacing="xs" style={{ marginLeft:25 ,marginRight: 25 , marginBottom :20 }}>
+      <SimpleGrid cols={2} spacing="lg" style={{ marginLeft:25 ,marginRight: 25 , marginBottom :30 }}>
         
         
       <ShowNewsLandingPage/>
