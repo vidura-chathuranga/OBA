@@ -9,7 +9,7 @@ const AddNewsAdmin = () =>{
         <div>
         <Grid>
           <Grid.Col span={"content"}>
-            <NavbarSimple link_id={3}/>
+            <NavbarSimple link_id={4}/>
           </Grid.Col>
   
           <Grid.Col span={"auto"}>

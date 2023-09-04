@@ -228,7 +228,7 @@ const ViewPromotionDetails = (values: {
                                     }}
                                     variant="subtle"
                                 >
-                                    Get Promo Code
+                                    Request Promo Code
                                 </Button>
 
 
