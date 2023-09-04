@@ -34,7 +34,11 @@ const userSchema = new mongoose.Schema({
 
     jobRole:{
         type:String,
-    }
+    },
+    status : {
+        type : String,
+        default : "REQUESTED"
+    },
 },{timestamps : true});
 
 const User = mongoose.model("users",userSchema);

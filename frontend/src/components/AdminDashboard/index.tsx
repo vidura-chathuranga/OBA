@@ -17,6 +17,8 @@ import {
   IconReceipt2,
   IconSwitchHorizontal,
   IconLogout,
+  IconGitPullRequest,
+  
 } from "@tabler/icons-react";
 import { DiscountCheck, News } from 'tabler-icons-react';
 import { MantineLogo } from "@mantine/ds";
@@ -27,17 +29,15 @@ const useStyles = createStyles((theme) => ({
   header: {
     paddingBottom: theme.spacing.md,
     marginBottom: `calc(${theme.spacing.md} * 1.5)`,
-    borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[2]
-    }`,
+    borderBottom: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[2]
+      }`,
   },
 
   footer: {
     paddingTop: theme.spacing.md,
     marginTop: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[2]
-    }`,
+    borderTop: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[2]
+      }`,
   },
 
   link: {
@@ -99,11 +99,20 @@ const useStyles = createStyles((theme) => ({
 
 const data = [
   {
+    link: "/admin/requstedMembers",
+    label: "Requsted Members",
+    icon: IconGitPullRequest,
+  },
+  {
     link: "/admin/manageMember",
     label: "Manage Members",
     icon: IconDatabaseImport,
   },
-  { link: "/admin/advertisement", label: "Adevertisement", icon: IconReceipt2 },
+  {
+    link: "/admin/advertisement",
+    label: "Adevertisement",
+    icon: IconReceipt2
+  },
   {
     link: "/admin/PromotionCodeManage",
     label: "Add Promation Code",
@@ -116,7 +125,7 @@ const data = [
   },
 ];
 
-const NavbarSimple = ({link_id} : any)=> {
+const NavbarSimple = ({ link_id }: any) => {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState(data[link_id].link);
 
@@ -129,7 +138,7 @@ const NavbarSimple = ({link_id} : any)=> {
       key={item.label}
       onClick={(event) => {
         setActive(item.label);
-        window.location.href=item.link;
+        window.location.href = item.link;
       }}
     >
       <item.icon className={classes.linkIcon} />
@@ -148,14 +157,14 @@ const NavbarSimple = ({link_id} : any)=> {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-       
+
         <a
           href="/admin/logout"
           className={classes.link}
           onClick={(event) => event.preventDefault()}
         >
           <IconLogout className={classes.linkIcon} stroke={1.5} />
-          <span onClick={() =>window.location.href='/admin/logout'}>Logout</span>
+          <span onClick={() => window.location.href = '/admin/logout'}>Logout</span>
         </a>
       </Navbar.Section>
     </Navbar>

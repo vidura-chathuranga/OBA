@@ -38,7 +38,7 @@ export const registerUser = async (req, res) => {
 export const getAllMembers = async (req, res) => {
 
     try {
-        const members = await User.find();
+        const members = await User.find({status: "ACCEPTED"});
 
         res.status(200).json(members);
     } catch (err) {
@@ -119,3 +119,34 @@ export const sendPromoCode = async (req, res) => {
 
     }
 };
+
+//get requstedMembers 
+export const getRequestedMembers = async (req,res) =>{
+
+    try{
+      const requestedMembers = await User.find({status : "REQUESTED"});
+  
+      // sends requested stocks to the frontend
+      res.status(200).json(requestedMembers);
+    }catch(error){
+      res.status(500).json({error:error,message:"Error while getting requested Members"})
+    }
+  };
+
+  export const acceptMember = async(req,res) =>{
+    const id = req.params.id; 
+
+    console.log(id)
+    try{
+  
+    //updated stock status 
+    const acceptedMember = await User.findByIdAndUpdate(id,{status:"ACCEPTED"});
+  
+    //send the success status
+    res.status(200).json(acceptedMember);
+  
+  }catch(error){
+    res.status(500).json({error:error,message:"Error while Accepting the Member status"});
+  }
+  
+  }

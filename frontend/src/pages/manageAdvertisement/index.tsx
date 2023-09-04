@@ -8,7 +8,7 @@ const ManageAdvertisementPage = () =>{
         <div>
         <Grid>
           <Grid.Col span={"content"}>
-            <NavbarSimple link_id={1}/>
+            <NavbarSimple link_id={2}/>
           </Grid.Col>
   
           <Grid.Col span={"auto"}>

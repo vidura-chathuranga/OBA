@@ -7,7 +7,7 @@ const ManageMembersPage = () => {
       <div>
       <Grid>
         <Grid.Col span={"content"}>
-          <NavbarSimple link_id={0}/>
+          <NavbarSimple link_id={1}/>
         </Grid.Col>
 
         <Grid.Col span={"auto"}>

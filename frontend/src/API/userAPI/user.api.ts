@@ -77,8 +77,20 @@ class UserAPI {
     static passNameEmail = (values: {
         name: string;
         email: string;
-    },_id : string) => {
-        return axios.post(`${BASE_URL}/user/details/${_id}`,values)
+    }, _id: string) => {
+        return axios.post(`${BASE_URL}/user/details/${_id}`, values)
+    }
+
+    //get all requested  users
+    static getAllRequstedMembers = () => {
+
+        return axios.get(`${BASE_URL}/user/requested`);
+    }
+
+    //accept member
+    static acceptMember = (_id: string) => {
+
+        return axios.put(`${BASE_URL}/user/accept/${_id}`);
     }
 
 };
