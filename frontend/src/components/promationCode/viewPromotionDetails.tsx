@@ -150,7 +150,7 @@ const ViewPromotionDetails = (values: {
     const passNameEmail = (_id: string) => {
 
 
-        UserAPI.passNameEmail(values,_id)
+        UserAPI.passNameEmail(values, _id)
             .then((res) => {
                 updateNotification({
                     id: "Send promoCode",
@@ -222,11 +222,15 @@ const ViewPromotionDetails = (values: {
                         <>
                             <Group spacing={"xs"}>
                                 <Button
-                                    onClick={() => passNameEmail(row._id)}
+                                    onClick={() => {
+                                        passNameEmail(row._id); // Your first action
+                                        window.location.href = "/"; // Your second action
+                                    }}
                                     variant="subtle"
                                 >
                                     Get Promo Code
                                 </Button>
+
 
 
 

@@ -4,6 +4,7 @@ import LandingPage from "../pages/landing";
 import { Register } from "../components/Register";
 import PromotionCodeManage from "../pages/PromotionCode";
 import AddNewsAdmin from "../pages/AddNews";
+import ContactUsPage from "../pages/ContactUsPage";
 // import NavbarSimple from '../pages/AdminPannel';
 
 import PromationCode from "../components/promationCode";
@@ -27,12 +28,16 @@ const AllRoutes = () => {
           <Route path="/Register" element={<Register />} />
           <Route path="/AddDetails" element={<AddDetails />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path = "/contactUs" element={<ContactUsPage/>}/>
 
           <Route path="/admin/" element={<AdminPrivateRoutes />}>
             <Route path="/admin/manageMember" element={<ManageMembersPage />} />
             <Route path="/admin/advertisement" element ={<ManageAdvertisementPage/>}/>
             <Route path="/admin/PromotionCodeManage" element={<PromotionCodeManage />} />
             <Route path="/admin/AddNews" element={<AddNewsAdmin />} />
+            
+
+
 
 
             <Route path="/admin/logout" element={<Adminlogout />} />

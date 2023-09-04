@@ -103,17 +103,21 @@ const DefaultHeader = () => {
             <a href="#" className={classes.link}>
               Contact Us
             </a> */}
-            <a href="/AddDetails" className={classes.link}>
-              Become a member
-            </a>
+            
           </Group>
 
           <Group className={classes.hiddenMobile}>
+            <Button onClick={() =>
+                window.location.href = "/ContactUs"}
+              >
+              Contact Us
+            </Button>
+
             <Button
               onClick={() =>
-                window.location.href = '/admin/login'}
-              style={buttonStyle}>
-              Admin Pannel
+                window.location.href = "/AddDetails"}
+              >
+              Become a member
             </Button>
             {/* <Button variant="default">Log in</Button>
             <Button>Sign up</Button> */}
